@@ -4,6 +4,34 @@
 include("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
 ?>
+<?php
+if ($_GET["editar"] != "") {
+	$servername = "localhost";
+	$username = "root";
+	$password = "itep123";
+	$dbname = "itep_necro";
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	$sql = "UPDATE usuarios SET senha='123456' WHERE id=" . $_GET["editar"];
+}
+if ($_GET["excluir"] != "") {
+	$servername = "localhost";
+	$username = "root";
+	$password = "itep123";
+	$dbname = "itep_necro";
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+	$sql = "DELETE FROM usuarios WHERE id=" . $_GET['editar'] . "";
+}
+?>
 <?php include 'head.php'; ?>
 
 <body>
@@ -13,6 +41,36 @@ protegePagina(); // Chama a função que protege a página
 				<?php include 'nav.php'; ?>
 				<!--inner block start here-->
 				<div class="inner-block">
+					<?php
+					if ($_GET["editar"] != "") {
+						if (mysqli_query($conn, $sql)) {
+							echo '<div class="alert alert-success alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo 'Sucesso! Senha do usuário id ' . $_GET['editar'] . ' resetada.';
+							echo '</div>';
+						} else {
+							echo '<div class="alert alert-danger alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+							echo '</div>';
+						}
+						mysqli_close($conn);
+					}
+					if ($_GET["excluir"] != "") {
+						if (mysqli_query($conn, $sql)) {
+							echo '<div class="alert alert-success alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo 'Sucesso! Usuário id ' . $_GET['editar'] . ' excluído.';
+							echo '</div>';
+						} else {
+							echo '<div class="alert alert-danger alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+							echo '</div>';
+						}
+						mysqli_close($conn);
+					}
+					?>
 					<div class="typography">
 						<div class="col-md-12 chit-chat-layer1-left">
 							<div class="work-progres">
@@ -57,8 +115,8 @@ protegePagina(); // Chama a função que protege a página
 													echo "<td>" . $row["sobre_nome"] . "</td>";
 													echo "<td>" . $row["matricula"] . "</td>";
 													echo "<td>" . $row["usuario"] . "</td>";
-													echo '<td><a href="?editar='.$row["id"].'"><i class="fa fa-edit"></a></td>';
-													echo '<td><a href="?excluir='.$row["id"].'"><i class="fa fa-remove"></a></td>';
+													echo '<td><a href="?editar=' . $row["id"] . '"><i class="fa fa-edit"></a></td>';
+													echo '<td><a href="?excluir=' . $row["id"] . '"><i class="fa fa-remove"></a></td>';
 													echo "</tr>";
 												}
 											} else {
