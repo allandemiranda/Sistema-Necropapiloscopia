@@ -2,12 +2,19 @@
 <html>
 
 <head>
-	<title>Sistema Necropapiloscopia </title>
+	<title>Sistema Necropapiloscopia</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="keywords" content="Sistema, documentos" />
-	<script
-		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<script type="application/x-javascript">
+		addEventListener("load", function() {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 	<!-- Custom Theme files -->
@@ -29,12 +36,10 @@
 				<h1>Login</h1>
 			</div>
 			<div class="login-block">
-				<form>
-					<input type="text" name="email" placeholder="Usuário" required="">
-					<input type="password" name="password" class="lock" placeholder="Senha">
+				<form method="post" action="valida.php">
+					<input type="text" name="usuario" placeholder="Usuário" required="" maxlength="50">
+					<input type="password" name="senha" class="lock" placeholder="Senha" maxlength="50">
 					<div class="forgot-top-grids">
-
-
 						<div class="clearfix"> </div>
 					</div>
 					<input type="submit" name="Entrar" value="Login">
@@ -43,12 +48,7 @@
 		</div>
 	</div>
 	<!--inner block end here-->
-	<!--copy rights start here-->
-	<div class="copyrights">
-		<p>© 2019 Sistema Necropapiloscopia. All Rights Reserved | Design by <a href="http://allandemiranda.eti.br/"
-				target="_blank">Allan de Miranda</a> </p>
-	</div>
-	<!--COPY rights end here-->
+	<?php include 'footer.php'; ?>
 
 	<!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>
