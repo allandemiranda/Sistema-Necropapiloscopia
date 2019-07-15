@@ -4,6 +4,36 @@
 include("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
 ?>
+<?php
+function test_input($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+$senha = $cargo = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$senha = test_input($_POST["senha"]);
+	$cargo = test_input($_POST["cargo"]);
+
+	$servername = "localhost";
+	$username = "root";
+	$password = "itep123";
+	$dbname = "itep_necro";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+
+	$sql = "UPDATE usuarios SET cargo = '" . $cargo . "', senha = '" . $senha . "' WHERE id = " . $_SESSION['usuarioID'];
+}
+?>
 <?php include 'head.php'; ?>
 
 <body>
@@ -14,8 +44,22 @@ protegePagina(); // Chama a função que protege a página
 				<!--inner block start here-->
 				<div class="inner-block">
 					<div class="typography">
+						<?php
+						if (mysqli_query($conn, $sql)) {
+							echo '<div class="alert alert-success alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo 'Sucesso! Usuário atualizado.';
+							echo '</div>';
+						} else {
+							echo '<div class="alert alert-danger alert-dismissable">';
+							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+							echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+							echo '</div>';
+						}
+						mysqli_close($conn);
+						?>
 						<h2>Perfil</h2>
-						<form action="" method="GET">
+						<form action="" method="POST">
 							<div class="clearfix"> </div>
 							<div class="typo-buttons col-md-12 grid_4">
 								<div class="col-md-12 well">
@@ -29,7 +73,7 @@ protegePagina(); // Chama a função que protege a página
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Cargo </label>
-									<input class="col-md-8" type="text" maxlength="50" value="<?php echo $_SESSION['usuarioCargo']; ?>" required>
+									<input name="cargo" class="col-md-8" type="text" maxlength="50" value="<?php echo $_SESSION['usuarioCargo']; ?>" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Usuário </label>
@@ -37,10 +81,10 @@ protegePagina(); // Chama a função que protege a página
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Senha </label>
-									<input class="col-md-3" type="password" maxlength="50" value="<?php $_SESSION['usuarioSenha']; ?>" required>
+									<input name="senha" class="col-md-3" type="password" maxlength="50" value="<?php $_SESSION['usuarioSenha']; ?>" required>
 								</div>
 								<div class="grid1">
-									<button type="button" class="btn btn-1 btn-success">Modificar</button>
+									<button type="button" class="btn btn-1 btn-success">Salvar</button>
 									<a href="/"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
 								</div>
 							</div>

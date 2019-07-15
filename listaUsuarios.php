@@ -33,69 +33,40 @@ protegePagina(); // Chama a função que protege a página
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>6</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
-											<tr>
-												<td>7</td>
-												<td>SANDRA </td>
-												<td>MARIA MATEUS </td>
-												<td>98.568-6 </td>
-												<td>sandra.maria</td>
-												<td><i class="fa fa-edit"></td>
-												<td><i class="fa fa-remove"></td>
-											</tr>
+											<?php
+											$servername = "localhost";
+											$username = "root";
+											$password = "itep123";
+											$dbname = "itep_necro";
+
+											// Create connection
+											$conn = mysqli_connect($servername, $username, $password, $dbname);
+											// Check connection
+											if (!$conn) {
+												die("Connection failed: " . mysqli_connect_error());
+											}
+
+											$sql = "SELECT * FROM usuarios";
+											$result = mysqli_query($conn, $sql);
+											if (mysqli_num_rows($result) > 0) {
+												// output data of each row
+												while ($row = mysqli_fetch_assoc($result)) {
+													echo "<tr>";
+													echo "<td>" . $row["id"] . "</td>";
+													echo "<td>" . $row["nome"] . "</td>";
+													echo "<td>" . $row["sobre_nome"] . "</td>";
+													echo "<td>" . $row["matricula"] . "</td>";
+													echo "<td>" . $row["usuario"] . "</td>";
+													echo '<td><a href="?editar='.$row["id"].'"><i class="fa fa-edit"></a></td>';
+													echo '<td><a href="?excluir='.$row["id"].'"><i class="fa fa-remove"></a></td>';
+													echo "</tr>";
+												}
+											} else {
+												echo "0 results";
+											}
+
+											mysqli_close($conn);
+											?>
 										</tbody>
 									</table>
 								</div>

@@ -20,7 +20,7 @@ protegePagina(); // Chama a função que protege a página
 						<div class="error-right">
 							<h2>Oops! Page não aberta</h2>
 							<h4>Não existe nada aqui!!</h4>
-							<a href="index.php">Voltar</a>
+							<a href="/">Voltar</a>
 						</div>
 					</div>
 				</div>

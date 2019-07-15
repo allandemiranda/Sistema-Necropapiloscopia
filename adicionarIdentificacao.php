@@ -24,24 +24,24 @@ protegePagina(); // Chama a função que protege a página
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome Completo </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome do Pai </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome da Mãe </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Naturalidade </label>
-									<input class="col-md-7" type="text" placeholder="Cidade">
-									<input class="col-md-1" type="text" placeholder="UF">
+									<input class="col-md-7" type="text" placeholder="Cidade" required>
+									<input class="col-md-1" type="text" placeholder="UF" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data de Nascimento </label>
-									<input class="col-md-2" type="date">
+									<input class="col-md-2" type="date" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Documento Apresentado </label>
@@ -51,9 +51,9 @@ protegePagina(); // Chama a função que protege a página
 										<option>PRONT. CIVIL</option>
 										<option>RESERVISTA</option>
 									</select>
-									<input class="col-md-3" type="number" placeholder="nº">
-									<input class="col-md-2" type="text" placeholder="Orgão">
-									<input class="col-md-1" type="text" placeholder="UF">
+									<input class="col-md-3" type="number" placeholder="nº" required>
+									<input class="col-md-2" type="text" placeholder="Orgão" required>
+									<input class="col-md-1" type="text" placeholder="UF" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Observações </label>

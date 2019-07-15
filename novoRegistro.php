@@ -20,45 +20,45 @@ protegePagina(); // Chama a função que protege a página
 							<div class="typo-buttons col-md-12 grid_4">
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nº NIC </label>
-									<input class="col-md-4" type="text">
+									<input class="col-md-4" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data de Entrada </label>
-									<input class="col-md-2" type="date">
+									<input class="col-md-2" type="date" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Informações Cadáver </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data do Fato </label>
-									<input class="col-md-2" type="date">
+									<input class="col-md-2" type="date" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Procedente </label>
-									<input class="col-md-4" type="text" placeholder="Bairro ou Hospital">
-									<input class="col-md-3" type="text" placeholder="Cidade">
-									<input class="col-md-1" type="text" placeholder="UF">
+									<input class="col-md-4" type="text" placeholder="Bairro ou Hospital" required>
+									<input class="col-md-3" type="text" placeholder="Cidade" required>
+									<input class="col-md-1" type="text" placeholder="UF" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Situação do Cadáver </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nº da Guia de Solicitação </label>
-									<input class="col-md-4" type="text">
+									<input class="col-md-4" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Causa Morte </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Destino do Exame </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Protocolo SEI </label>
-									<input class="col-md-8" type="text">
+									<input class="col-md-8" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<input class="col-md-1" type="checkbox">

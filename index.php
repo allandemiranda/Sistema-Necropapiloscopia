@@ -32,7 +32,7 @@ protegePagina(); // Chama a função que protege a página
 								<div class="col-md-8 market-update-left">
 									<h3>135</h3>
 									<h4>Doc. Registrados</h4>
-									<p>Emitidos por NOMEUS</p>
+									<p>Emitidos por <?php echo $_SESSION['usuarioNome']; ?></p>
 								</div>
 								<div class="col-md-4 market-update-right">
 									<i class="fa fa-eye"> </i>
@@ -43,7 +43,29 @@ protegePagina(); // Chama a função que protege a página
 						<div class="col-md-4 market-update-gd">
 							<div class="market-update-block clr-block-3">
 								<div class="col-md-8 market-update-left">
-									<h3>23</h3>
+									<?php
+									$servername = "localhost";
+									$username = "root";
+									$password = "itep123";
+									$dbname = "itep_necro";
+
+									// Create connection
+									$conn = mysqli_connect($servername, $username, $password, $dbname);
+									// Check connection
+									if (!$conn) {
+										die("Connection failed: " . mysqli_connect_error());
+									}
+
+									$sql = "SELECT * FROM usuarios";
+									$result = mysqli_query($conn, $sql);
+
+									?>
+									<h3>
+										<?php
+										echo mysqli_num_rows($result);
+										mysqli_close($conn);
+										?>
+									</h3>
 									<h4>Usuários</h4>
 									<p>Membros do setor</p>
 								</div>
