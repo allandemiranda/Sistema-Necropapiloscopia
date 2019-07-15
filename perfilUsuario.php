@@ -20,28 +20,28 @@ protegePagina(); // Chama a função que protege a página
 							<div class="typo-buttons col-md-12 grid_4">
 								<div class="col-md-12 well">
 									<label class="col-md-4">Dados </label>
-									<input class="col-md-3" type="text" placeholder="Nome" disabled>
-									<input class="col-md-5" type="text" placeholder="Sobrenome" disabled>
+									<input class="col-md-3" type="text" placeholder="Nome" value="<?php echo $_SESSION['usuarioNome']; ?>" disabled>
+									<input class="col-md-5" type="text" placeholder="Sobrenome" value="<?php echo $_SESSION['usuarioSobreNome']; ?>" disabled>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Matrícula </label>
-									<input class="col-md-3" type="text" disabled>
+									<input class="col-md-3" type="text" value="<?php echo $_SESSION['usuarioMatricula']; ?>" disabled>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Cargo </label>
-									<input class="col-md-8" type="text" maxlength="50" required>
+									<input class="col-md-8" type="text" maxlength="50" value="<?php echo $_SESSION['usuarioCargo']; ?>" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Usuário </label>
-									<input class="col-md-3" type="text" disabled>
+									<input class="col-md-3" type="text" value="<?php echo $_SESSION['usuarioLogin']; ?>" disabled>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Senha </label>
-									<input class="col-md-3" type="password" maxlength="50" required>
+									<input class="col-md-3" type="password" maxlength="50" value="<?php $_SESSION['usuarioSenha']; ?>" required>
 								</div>
 								<div class="grid1">
 									<button type="button" class="btn btn-1 btn-success">Modificar</button>
-									<button type="button" class="btn btn-1 btn-danger">Cancelar</button>
+									<a href="/"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
 								</div>
 							</div>
 						</form>
