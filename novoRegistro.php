@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$destino_exame = test_input($_POST["destino_exame"]);
 	$numero_sei = test_input($_POST["numero_sei"]);
 	$status_coleta = test_input($_POST["status_coleta"]);
+	$data_formulario = test_input(date("c"));
 
 	if ($status_coleta == "on") {
 		$status_coleta = 1;
@@ -49,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	$sql = "INSERT INTO `documentos`(`perito`, `numero_nic`, `data_entrada`, `cadaver_informacao`, `data_fato`, `procedencia_bairro`, `procedencia_cidade`, `procedencia_uf`, `cadaver_situacao`, `numero_guia`, `causa_morte`, `destino_exame`, `numero_sei`, `status_coleta`) VALUES ('" . $perito . "','" . $numero_nic . "','" . $data_entrada . "','" . $cadaver_informacao . "','" . $data_fato . "','" . $procedencia_bairro . "','" . $procedencia_cidade . "','" . $procedencia_uf . "','" . $cadaver_situacao . "','" . $numero_guia . "','" . $causa_morte . "','" . $destino_exame . "','" . $numero_sei . "','" . $status_coleta . "')";
+	$sql = "INSERT INTO `documentos`(`perito`, `numero_nic`, `data_entrada`, `cadaver_informacao`, `data_fato`, `procedencia_bairro`, `procedencia_cidade`, `procedencia_uf`, `cadaver_situacao`, `numero_guia`, `causa_morte`, `destino_exame`, `numero_sei`, `status_coleta`, `data_formulario`) VALUES ('" . $perito . "','" . $numero_nic . "','" . $data_entrada . "','" . $cadaver_informacao . "','" . $data_fato . "','" . $procedencia_bairro . "','" . $procedencia_cidade . "','" . $procedencia_uf . "','" . $cadaver_situacao . "','" . $numero_guia . "','" . $causa_morte . "','" . $destino_exame . "','" . $numero_sei . "','" . $status_coleta . "','" . $data_formulario . "')";
 }
 ?>
 <?php include 'head.php'; ?>

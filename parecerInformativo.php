@@ -1,60 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-    <title>Sistema Necropapiloscopia </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Sistema, documentos" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style>
-        .A4 {
-            background-color: #ffffff;
-            color: #000000;
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 15pt;
-            line-height: 1.3;
-        }
-
-        .cabecalho-texto {
-            text-align: center;
-            font-size: 15pt;
-        }
-
-        .cabecalho-img-esquerda {
-            float: left;
-            width: 100%;
-        }
-
-        .cabecalho-img-direita {
-            float: right;
-            width: 100%;
-        }
-
-        .titulo {
-            text-align: center;
-            font-size: 16pt;
-            color: #000000;
-            background-color: #d5e2bb;
-        }
-
-        .paragrafo {
-            text-indent: 4em;
-            text-align: justify;
-        }
-
-        .datacao {
-            text-align: right;
-        }
-
-        .assinatura {
-            text-align: center;
-            line-height: 0.2;
-        }
-    </style>
-</head>
 <?php
 $servername = "localhost";
 $username = "root";
@@ -197,7 +140,8 @@ function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon"
     }
 }
 
-function mesData($mes_num){
+function mesData($mes_num)
+{
     if ($mes_num == "01") {
         return "Janeiro";
     } elseif ($mes_num == "02") {
@@ -225,6 +169,63 @@ function mesData($mes_num){
     }
 }
 ?>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Sistema Necropapiloscopia </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Sistema, documentos" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .A4 {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 15pt;
+            line-height: 1.3;
+        }
+
+        .cabecalho-texto {
+            text-align: center;
+            font-size: 15pt;
+        }
+
+        .cabecalho-img-esquerda {
+            float: left;
+            width: 100%;
+        }
+
+        .cabecalho-img-direita {
+            float: right;
+            width: 100%;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 16pt;
+            color: #000000;
+            background-color: #d5e2bb;
+        }
+
+        .paragrafo {
+            text-indent: 4em;
+            text-align: justify;
+        }
+
+        .datacao {
+            text-align: right;
+        }
+
+        .assinatura {
+            text-align: center;
+            line-height: 0.2;
+        }
+    </style>
+</head>
 
 <body class="A4">
     <div class="container">

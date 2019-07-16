@@ -1,3 +1,174 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "itep123";
+$dbname = "itep_necro";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
+$result = mysqli_query($conn, $sql);
+
+$perito_nome = $protocolo = $protocolo_ano = $entrada_dia = $entrada_mes = $entrada_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $perito_nome = $row["perito"];
+        $protocolo = str_pad($row["id"], 4, '0', STR_PAD_LEFT);
+        $data_entrada_ex = explode("-", $row["data_entrada"]);
+        $protocolo_ano = $data_entrada_ex[0];
+        $entrada_dia = $data_entrada_ex[2];
+        $entrada_mes = $data_entrada_ex[1];
+        $entrada_ano = $data_entrada_ex[0];
+        $numero_nic = $row["numero_nic"];
+        $procedencia_barrio = $row["procedencia_bairro"];
+        $procedencia_cidade = $row["procedencia_cidade"];
+        $procedencia_uf = $row["procedencia_uf"];
+    }
+} else {
+    //echo "0 results";
+}
+
+mysqli_close($conn);
+?>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "itep123";
+$dbname = "itep_necro";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM usuarios WHERE nome='" . $perito_nome . "'";
+$result = mysqli_query($conn, $sql);
+
+$perito_sobrenome = $perito_cargo = $matricula = "";
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $perito_sobrenome = $row["sobre_nome"];
+        $perito_cargo = $row["cargo"];
+        $perito_matricula = $row["matricula"];
+    }
+} else {
+    //echo "0 results";
+}
+
+mysqli_close($conn);
+?>
+<?php
+/**
+ * Converter TimeStamp para data em Português
+ *
+ * @param integer $timestamp Unix timestamp
+ * @param boolean $hours Se "true" devolve também as horas
+ * @param string $timeZone Zona a utilizar para gerar as horas
+ *
+ * @return string
+ */
+function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon")
+{
+
+    $dia_num = date("w", $timestamp); // Dia da semana.
+
+    if ($dia_num == 0) {
+        $dia_nome = "Domingo";
+    } elseif ($dia_num == 1) {
+        $dia_nome = "Segunda";
+    } elseif ($dia_num == 2) {
+        $dia_nome = "Terça";
+    } elseif ($dia_num == 3) {
+        $dia_nome = "Quarta";
+    } elseif ($dia_num == 4) {
+        $dia_nome = "Quinta";
+    } elseif ($dia_num == 5) {
+        $dia_nome = "Sexta";
+    } else {
+        $dia_nome = "Sábado";
+    }
+
+    $dia_mes = date("d", $timestamp); // Dia do mês
+
+    $mes_num = date("m", $timestamp); // Nome do mês
+
+    if ($mes_num == "01") {
+        $mes_nome = "Janeiro";
+    } elseif ($mes_num == "02") {
+        $mes_nome = "Fevereiro";
+    } elseif ($mes_num == "03") {
+        $mes_nome = "Março";
+    } elseif ($mes_num == "04") {
+        $mes_nome = "Abril";
+    } elseif ($mes_num == "05") {
+        $mes_nome = "Maio";
+    } elseif ($mes_num == "06") {
+        $mes_nome = "Junho";
+    } elseif ($mes_num == "07") {
+        $mes_nome = "Julho";
+    } elseif ($mes_num == "08") {
+        $mes_nome = "Agosto";
+    } elseif ($mes_num == "09") {
+        $mes_nome = "Setembro";
+    } elseif ($mes_num == "10") {
+        $mes_nome = "Outubro";
+    } elseif ($mes_num == "11") {
+        $mes_nome = "Novembro";
+    } else {
+        $mes_nome = "Dezembro";
+    }
+    $ano = date("Y", $timestamp); // Ano
+
+    date_default_timezone_set($timeZone); // Set time-zone
+    $hora = date("H:i", $timestamp);
+
+    if ($hours) {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano . " - " . $hora;
+    } else {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano;
+    }
+}
+
+function mesData($mes_num)
+{
+    if ($mes_num == "01") {
+        return "Janeiro";
+    } elseif ($mes_num == "02") {
+        return "Fevereiro";
+    } elseif ($mes_num == "03") {
+        return "Março";
+    } elseif ($mes_num == "04") {
+        return "Abril";
+    } elseif ($mes_num == "05") {
+        return "Maio";
+    } elseif ($mes_num == "06") {
+        return "Junho";
+    } elseif ($mes_num == "07") {
+        return "Julho";
+    } elseif ($mes_num == "08") {
+        return "Agosto";
+    } elseif ($mes_num == "09") {
+        return "Setembro";
+    } elseif ($mes_num == "10") {
+        return "Outubro";
+    } elseif ($mes_num == "11") {
+        return "Novembro";
+    } else {
+        return "Dezembro";
+    }
+}
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -5,17 +176,10 @@
     <title>Sistema Necropapiloscopia </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Sistema, documentos" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .A4 {
             background-color: #ffffff;
@@ -79,7 +243,7 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-sm-10 titulo alert alert-success">
-                <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº 0000/0000</b>
+            <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº <?php echo $protocolo; ?>/<?php echo $protocolo_ano; ?></b>
             </div>
         </div>
         <div class="row">
