@@ -32,107 +32,89 @@ protegePagina(); // Chama a função que protege a página
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0001/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0001/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0001/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0001/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
+											<?php
+											$servername = "localhost";
+											$username = "root";
+											$password = "itep123";
+											$dbname = "itep_necro";
+
+											// Create connection
+											$conn = mysqli_connect($servername, $username, $password, $dbname);
+											// Check connection
+											if (!$conn) {
+												die("Connection failed: " . mysqli_connect_error());
+											}
+
+											$sql = "SELECT * FROM documentos";
+											$result = mysqli_query($conn, $sql);
+											$cont_page = 0;
+											if ($_GET["page"] == "") {
+												$cont_page = 1;
+											} else {
+												$cont_page = $_GET["page"];
+											}
+											$num_rows = 0;
+											$total_pages = mysqli_num_rows($result);
+											if (mysqli_num_rows($result) > 0) {
+												// output data of each row
+												while ($row = mysqli_fetch_assoc($result)) {
+													$num_rows++;
+													if ($num_rows < $cont_page) {
+														continue;
+													}
+													if ($num_rows >= ($cont_page + 100)) {
+														break;
+													}
+													echo "<tr>";
+													$data_entrada_ex = explode("-", $row["data_entrada"]);
+													echo "<td>" . str_pad($row["id"], 4, '0', STR_PAD_LEFT) . "/" . $data_entrada_ex[0] . "</td>";
+													if ($row["nome_completo"] == "") {
+														echo "<td> - </td>";
+													} else {
+														echo "<td>" . $row["nome_completo"] . "</td>";
+													}
+													echo "<td>" . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . "</td>";
+													if ($row["status_coleta"] == 1) {
+														echo '<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>';
+													} else {
+														if ($row["nome_completo"] == "") {
+															echo '<td><span class="label label-warning">Sem Identificação</span></td>';
+														} else {
+															echo '<td><span class="label label-success">Identificado</span></td>';
+														}
+													}
+													echo "<td>" . $row["perito"] . "</td>";
+													echo '<td><i class="fa fa-print"></td>';
+													echo "</tr>";
+												}
+											} else {
+												echo "0 results";
+											}
+
+											mysqli_close($conn);
+											?>
 										</tbody>
 									</table>
 									<div class="btn-group">
-										<a class="btn btn-default"><i class="fa fa-angle-left"></i></a>
-										<a class="btn btn-default"><i class="fa fa-angle-right"></i></a>
+										<?php
+										$proximo = $anterior = 1;
+										if (($cont_page + 100) > $total_pages) {
+											$proximo = 0;
+										}
+										if (($cont_page - 100) <= 0) {
+											$anterior = 0;
+										}
+										if ($anterior == 0) {
+											echo '<a href="listaDocumentos.php?page=' . $cont_page . '" class="btn btn-default"><i class="fa fa-angle-left"></i></a>';
+										} else {
+											echo '<a href="listaDocumentos.php?page=' . ($cont_page - 100) . '" class="btn btn-default"><i class="fa fa-angle-left"></i></a>';
+										}
+										if ($proximo == 0) {
+											echo '<a href="listaDocumentos.php?page=' . $cont_page . '" class="btn btn-default"><i class="fa fa-angle-right"></i></a>';
+										} else {
+											echo '<a href="listaDocumentos.php?page=' . ($cont_page + 100) . '" class="btn btn-default"><i class="fa fa-angle-right"></i></a>';
+										}
+										?>
 									</div>
 								</div>
 							</div>
