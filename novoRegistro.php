@@ -4,6 +4,55 @@
 include("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
 ?>
+<?php
+function test_input($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+$perito = $numero_nic = $data_entrada = $cadaver_informacao = $data_fato = $procedencia_bairro = $procedencia_cidade = $procedencia_uf = $cadaver_situacao = $numero_guia = $causa_morte = $destino_exame = $numero_sei = $status_coleta = "";
+// $nome_completo=$nome_pai=$nome_mae=$naturalidade_cidade=$naturalidade_uf=$data_nascimento=$docuemnto_tipo=$docuemnto_numero=$docuemnto_orgao=$docuemnto_uf=$observacoes="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	$perito = test_input($_SESSION['usuarioNome']);
+	$numero_nic = test_input($_POST["numero_nic"]);
+	$data_entrada = test_input($_POST["data_entrada"]);
+	$cadaver_informacao = test_input($_POST["cadaver_informacao"]);
+	$data_fato = test_input($_POST["data_fato"]);
+	$procedencia_bairro = test_input($_POST["procedencia_bairro"]);
+	$procedencia_cidade = test_input($_POST["procedencia_cidade"]);
+	$procedencia_uf = test_input($_POST["procedencia_uf"]);
+	$cadaver_situacao = test_input($_POST["cadaver_situacao"]);
+	$numero_guia = test_input($_POST["numero_guia"]);
+	$causa_morte = test_input($_POST["causa_morte"]);
+	$destino_exame = test_input($_POST["destino_exame"]);
+	$numero_sei = test_input($_POST["numero_sei"]);
+	$status_coleta = test_input($_POST["status_coleta"]);
+
+	if ($status_coleta == "on") {
+		$status_coleta = 1;
+	} else {
+		$status_coleta = 0;
+	}
+
+	$servername = "localhost";
+	$username = "root";
+	$password = "itep123";
+	$dbname = "itep_necro";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	// Check connection
+	if (!$conn) {
+		die("Connection failed: " . mysqli_connect_error());
+	}
+
+	$sql = "INSERT INTO `documentos`(`perito`, `numero_nic`, `data_entrada`, `cadaver_informacao`, `data_fato`, `procedencia_bairro`, `procedencia_cidade`, `procedencia_uf`, `cadaver_situacao`, `numero_guia`, `causa_morte`, `destino_exame`, `numero_sei`, `status_coleta`) VALUES ('" . $perito . "','" . $numero_nic . "','" . $data_entrada . "','" . $cadaver_informacao . "','" . $data_fato . "','" . $procedencia_bairro . "','" . $procedencia_cidade . "','" . $procedencia_uf . "','" . $cadaver_situacao . "','" . $numero_guia . "','" . $causa_morte . "','" . $destino_exame . "','" . $numero_sei . "','" . $status_coleta . "')";
+}
+?>
 <?php include 'head.php'; ?>
 
 <body>
@@ -14,58 +63,74 @@ protegePagina(); // Chama a função que protege a página
 				<!--inner block start here-->
 				<div class="inner-block">
 					<div class="typography">
+						<?php
+						if ($_SERVER["REQUEST_METHOD"] == "POST") {
+							if (mysqli_query($conn, $sql)) {
+								echo '<div class="alert alert-success alert-dismissable">';
+								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+								echo 'Sucesso! Adicionado.';
+								echo '</div>';
+							} else {
+								echo '<div class="alert alert-danger alert-dismissable">';
+								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+								echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+								echo '</div>';
+							}
+							mysqli_close($conn);
+						}
+						?>
 						<h2>Formulário de Registro</h2>
-						<form action="" method="GET">
+						<form action="novoRegistro.php" method="POST">
 							<div class="clearfix"> </div>
 							<div class="typo-buttons col-md-12 grid_4">
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nº NIC </label>
-									<input class="col-md-4" type="text" required>
+									<input name="numero_nic" class="col-md-4" type="text" onkeyup="this.value=this.value.replace(/[' ']/g,'')" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data de Entrada </label>
-									<input class="col-md-2" type="date" required>
+									<input name="data_entrada" class="col-md-2" type="date" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Informações Cadáver </label>
-									<input class="col-md-8" type="text" required>
+									<input name="cadaver_informacao" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data do Fato </label>
-									<input class="col-md-2" type="date" required>
+									<input name="data_fato" class="col-md-2" type="date" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Procedente </label>
-									<input class="col-md-4" type="text" placeholder="Bairro ou Hospital" required>
-									<input class="col-md-3" type="text" placeholder="Cidade" required>
-									<input class="col-md-1" type="text" placeholder="UF" required>
+									<input name="procedencia_bairro" class="col-md-4" type="text" placeholder="Bairro ou Hospital" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="procedencia_cidade" class="col-md-3" type="text" placeholder="Cidade" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="procedencia_uf" class="col-md-1" type="text" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" onkeyup="this.value=this.value.replace(/[' ']/g,'')" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Situação do Cadáver </label>
-									<input class="col-md-8" type="text" required>
+									<input name="cadaver_situacao" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nº da Guia de Solicitação </label>
-									<input class="col-md-4" type="text" required>
+									<input name="numero_guia" class="col-md-4" type="text" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Causa Morte </label>
-									<input class="col-md-8" type="text" required>
+									<input name="causa_morte" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Destino do Exame </label>
-									<input class="col-md-8" type="text" required>
+									<input name="destino_exame" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Protocolo SEI </label>
-									<input class="col-md-8" type="text" required>
+									<input name="numero_sei" class="col-md-4" type="text" onkeyup="this.value=this.value.replace(/[' ']/g,'')" required>
 								</div>
 								<div class="col-md-12 well">
-									<input class="col-md-1" type="checkbox">
+									<input name="status_coleta" class="col-md-1" type="checkbox">
 									<label class="col-md-11">Não apresenta condições de coleta de Impressões Digitais</label>
 								</div>
 								<div class="grid1">
-									<button type="button" class="btn btn-1 btn-success">Criar</button>
+									<button type="submit" class="btn btn-1 btn-success">Criar</button>
 									<a href="/"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
 								</div>
 							</div>

@@ -29,7 +29,7 @@ if ($_GET["excluir"] != "") {
 	if (!$conn) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
-	$sql = "DELETE FROM usuarios WHERE id=" . $_GET['editar'] . "";
+	$sql = "DELETE FROM `usuarios` WHERE id=" . $_GET['excluir'];
 }
 ?>
 <?php include 'head.php'; ?>
@@ -60,7 +60,7 @@ if ($_GET["excluir"] != "") {
 						if (mysqli_query($conn, $sql)) {
 							echo '<div class="alert alert-success alert-dismissable">';
 							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-							echo 'Sucesso! Usuário id ' . $_GET['editar'] . ' excluído.';
+							echo 'Sucesso! Usuário id ' . $_GET['excluir'] . ' excluído.';
 							echo '</div>';
 						} else {
 							echo '<div class="alert alert-danger alert-dismissable">';
@@ -115,8 +115,13 @@ if ($_GET["excluir"] != "") {
 													echo "<td>" . $row["sobre_nome"] . "</td>";
 													echo "<td>" . $row["matricula"] . "</td>";
 													echo "<td>" . $row["usuario"] . "</td>";
-													echo '<td><a href="?editar=' . $row["id"] . '"><i class="fa fa-edit"></a></td>';
-													echo '<td><a href="?excluir=' . $row["id"] . '"><i class="fa fa-remove"></a></td>';
+													if ($row["id"] == $_SESSION['usuarioID']) {
+														echo '<td></td>';
+														echo '<td></td>';
+													} else {
+														echo '<td><a href="?editar=' . $row["id"] . '"><i class="fa fa-edit"></a></td>';
+														echo '<td><a href="?excluir=' . $row["id"] . '"><i class="fa fa-remove"></a></td>';
+													}
 													echo "</tr>";
 												}
 											} else {

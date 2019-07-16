@@ -13,7 +13,7 @@
         <ul id="menu">
             <li id="menu-home"><a href="/"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
             </li>
-            <li><a href="#"><i class="fa fa-cogs"></i><span>Registros</span><span class="fa fa-angle-right" style="float: right"></span></a>
+            <li><a href="#"><i class="fa fa-user"></i><span>Registros</span><span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul>
                     <li><a href="novoRegistro.php">Novo</a></li>
                     <li><a href="listaDocumentos.php">Lista</a></li>
