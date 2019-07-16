@@ -51,7 +51,7 @@ function test_input($data)
 $perito=$nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$perito = test_input($_SESSION['perito']);
+	$perito = test_input($_SESSION['usuarioNome']);
 	$nome_completo = test_input($_POST['nome_completo']);
 	$nome_pai = test_input($_POST["nome_pai"]);
 	$nome_mae = test_input($_POST["nome_mae"]);
