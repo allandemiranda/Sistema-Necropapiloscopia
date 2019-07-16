@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							if (mysqli_query($conn, $sql)) {
 								echo '<div class="alert alert-success alert-dismissable">';
 								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-								echo 'Sucesso! Identificaçao adicionada a ' . $protocolo . '.';
+								echo 'Sucesso! Identificaçao adicionada.';
 								echo '</div>';
 							} else {
 								echo '<div class="alert alert-danger alert-dismissable">';
@@ -161,7 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 										?>
 									</select>
 									<input name="docuemnto_numero" class="col-md-3" type="text" value="<?php echo $docuemnto_numero; ?>" placeholder="nº" required>
-									<input name="docuemnto_oragao" class="col-md-2" type="text" value="<?php echo $docuemnto_orgao; ?>" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="docuemnto_orgao" class="col-md-2" type="text" value="<?php echo $docuemnto_orgao; ?>" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
 									<input name="docuemnto_uf" class="col-md-1" type="text" value="<?php echo $docuemnto_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
