@@ -36,6 +36,20 @@
 				<h1>Login</h1>
 			</div>
 			<div class="login-block">
+				<?php
+				if ($_GET["status"] == "erro") {
+					echo '<div class="alert alert-danger alert-dismissable">';
+					echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+					echo "Usuário ou Senha incorreto !";
+					echo '</div>';
+				}
+				if ($_GET["status"] == "logout") {
+					echo '<div class="alert alert-info alert-dismissable">';
+					echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+					echo 'Entre com seu usuário e senha';
+					echo '</div>';
+				}
+				?>
 				<form method="post" action="valida.php">
 					<input type="text" name="usuario" placeholder="Usuário" required="" maxlength="50">
 					<input type="password" name="senha" class="lock" placeholder="Senha" maxlength="50">

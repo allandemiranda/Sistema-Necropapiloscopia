@@ -45,16 +45,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<div class="inner-block">
 					<div class="typography">
 						<?php
-						if (mysqli_query($conn, $sql)) {
-							echo '<div class="alert alert-success alert-dismissable">';
-							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-							echo 'Sucesso! Usuário atualizado.';
-							echo '</div>';
-						} else {
-							echo '<div class="alert alert-danger alert-dismissable">';
-							echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-							echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-							echo '</div>';
+						if ($_SERVER["REQUEST_METHOD"] == "POST") {
+							if (mysqli_query($conn, $sql)) {
+								echo '<div class="alert alert-success alert-dismissable">';
+								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+								echo 'Sucesso! Usuário atualizado.';
+								echo '</div>';
+							} else {
+								echo '<div class="alert alert-danger alert-dismissable">';
+								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
+								echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+								echo '</div>';
+							}
 						}
 						mysqli_close($conn);
 						?>
@@ -84,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 									<input name="senha" class="col-md-3" type="password" maxlength="50" value="<?php $_SESSION['usuarioSenha']; ?>" required>
 								</div>
 								<div class="grid1">
-									<button type="button" class="btn btn-1 btn-success">Salvar</button>
+									<button type="submit" class="btn btn-1 btn-success">Salvar</button>
 									<a href="/"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
 								</div>
 							</div>

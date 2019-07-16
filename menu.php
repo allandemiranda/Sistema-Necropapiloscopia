@@ -11,16 +11,17 @@
     </div>
     <div class="menu">
         <ul id="menu">
-            <li id="menu-home"><a href="index.html"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+            <li id="menu-home"><a href="/"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
             </li>
-            <li><i class="fa fa-cogs"></i><span>Registros</span><span class="fa fa-angle-right" style="float: right"></span>
+            <li><a href="#"><i class="fa fa-cogs"></i><span>Registros</span><span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul>
                     <li><a href="novoRegistro.php">Novo</a></li>
                     <li><a href="listaDocumentos.php">Lista</a></li>
-                    <li><a href="pesquisaDocumentos.php">Pesquisar</a></li>
+                    <!--li><a href="pesquisaDocumentos.php">Pesquisar</a></li-->
+                    <li><a href="#">Pesquisar</a></li>
                 </ul>
             </li>
-            <li><i class="fa fa-cogs"></i><span>Usuários</span><span class="fa fa-angle-right" style="float: right"></span>
+            <li><a href="#"><i class="fa fa-cogs"></i><span>Usuários</span><span class="fa fa-angle-right" style="float: right"></span></a>
                 <ul>
                     <li><a href="novoUsuario.php">Novo</a></li>
                     <li><a href="listaUsuarios.php">Lista</a></li>

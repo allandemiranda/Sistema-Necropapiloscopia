@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: index.php");
     } else {
         // O usuário e/ou a senha são inválidos, manda de volta pro form de login
-        // Para alterar o endereço da página de login, verifique o arquivo seguranca.php
+        // Para alterar o endereço da página de login, verifique o arquivo seguranca.php        
         expulsaVisitante();
     }
 }

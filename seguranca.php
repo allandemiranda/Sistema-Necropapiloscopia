@@ -17,9 +17,8 @@ $_SG['tabela'] = 'usuarios';       // Nome da tabela onde os usuários são salv
 if ($_SG['conectaServidor'] == true) {
 
     $_SG['link'] = mysqli_connect($_SG['servidor'], $_SG['usuario'], $_SG['senha']) or die("MySQL: Não foi possível conectar-se ao servidor [" . $_SG['servidor'] . "].");
-    
-    mysqli_select_db($_SG['link'],$_SG['banco']) or die("MySQL: Não foi possível conectar-se ao banco de dados [" . $_SG['banco'] . "].");
 
+    mysqli_select_db($_SG['link'], $_SG['banco']) or die("MySQL: Não foi possível conectar-se ao banco de dados [" . $_SG['banco'] . "].");
 }
 // Verifica se precisa iniciar a sessão
 if ($_SG['abreSessao'] == true)
@@ -41,11 +40,11 @@ function validaUsuario($usuario, $senha)
     $nsenha = addslashes($senha);
     // Monta uma consulta SQL (query) para procurar um usuário
     $sql = "SELECT * FROM `" . $_SG['tabela'] . "` WHERE " . $cS . " `usuario` = '" . $nusuario . "' AND " . $cS . " `senha` = '" . $nsenha . "' LIMIT 1";
-    $query = mysqli_query($_SG['link'],$sql);
+    $query = mysqli_query($_SG['link'], $sql);
     $resultado = mysqli_fetch_assoc($query);
     // Verifica se encontrou algum registro
     if (empty($resultado)) {
-        // Nenhum registro foi encontrado => o usuário é inválido
+        // Nenhum registro foi encontrado => o usuário é inválido        
         return false;
     } else {
         // Definimos dois valores na sessão com os dados do usuário
@@ -92,5 +91,5 @@ function expulsaVisitante()
     // Remove as variáveis da sessão (caso elas existam)
     unset($_SESSION['usuarioID'], $_SESSION['usuarioNome'], $_SESSION['usuarioLogin'], $_SESSION['usuarioSenha']);
     // Manda pra tela de login
-    header("Location: " . $_SG['paginaLogin']);
+    header("Location: " . $_SG['paginaLogin'] . "?status=erro");
 }
