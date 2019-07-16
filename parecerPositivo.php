@@ -28,10 +28,10 @@ if (mysqli_num_rows($result) > 0) {
         $doc_dia = $data_doc_ex[2];
         $doc_mes = $data_doc_ex[1];
         $doc_ano = $data_doc_ex[0];
-        // $numero_nic = $row["numero_nic"];
-        // $procedencia_barrio = $row["procedencia_bairro"];
-        // $procedencia_cidade = $row["procedencia_cidade"];
-        // $procedencia_uf = $row["procedencia_uf"];
+        $numero_nic = $row["numero_nic"];
+        $procedencia_barrio = $row["procedencia_bairro"];
+        $procedencia_cidade = $row["procedencia_cidade"];
+        $procedencia_uf = $row["procedencia_uf"];
         // $nome_completo = test_input($row['nome_completo']);
         // $nome_pai = test_input($row["nome_pai"]);
         // $nome_mae = test_input($row["nome_mae"]);
