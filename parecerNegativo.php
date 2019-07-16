@@ -14,8 +14,6 @@ if (!$conn) {
 $sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
 $result = mysqli_query($conn, $sql);
 
-$perito_nome = $protocolo = $protocolo_ano = $entrada_dia = $entrada_mes = $entrada_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
-
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while ($row = mysqli_fetch_assoc($result)) {
@@ -23,13 +21,15 @@ if (mysqli_num_rows($result) > 0) {
         $protocolo = str_pad($row["id"], 4, '0', STR_PAD_LEFT);
         $data_entrada_ex = explode("-", $row["data_entrada"]);
         $protocolo_ano = $data_entrada_ex[0];
-        $entrada_dia = $data_entrada_ex[2];
-        $entrada_mes = $data_entrada_ex[1];
-        $entrada_ano = $data_entrada_ex[0];
+        $data_doc_ex = explode("-", $row["data_formulario"]);
+        $doc_dia = $data_doc_ex[2];
+        $doc_mes = $data_doc_ex[1];
+        $doc_ano = $data_doc_ex[0];
         $numero_nic = $row["numero_nic"];
         $procedencia_barrio = $row["procedencia_bairro"];
         $procedencia_cidade = $row["procedencia_cidade"];
         $procedencia_uf = $row["procedencia_uf"];
+        $cadaver_informacao = $row["cadaver_informacao"];
     }
 } else {
     //echo "0 results";
@@ -243,16 +243,16 @@ function mesData($mes_num)
         <br>
         <div class="row justify-content-center">
             <div class="col-sm-10 titulo alert alert-success">
-            <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº <?php echo $protocolo; ?>/<?php echo $protocolo_ano; ?></b>
+                <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº <?php echo $protocolo; ?>/<?php echo $protocolo_ano; ?></b>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 paragrafo">
                 <p>
-                    Em <b>02 de Junho de 2019</b> , o Instituto de Identificação do Rio Grande do Norte - IIRN, em
+                    Em <b><?php echo $doc_dia; ?> de <?php echo mesData($doc_mes); ?> de <?php echo $doc_ano; ?></b> , o Instituto de Identificação do Rio Grande do Norte - IIRN, em
                     conformidade com a legalidade vigente na Portaria nº 119/2012- GS/SESED informa que, foram
                     realizadas coletas das impressões digitais no cadáver registrado no Instituto de Medicina Legal -
-                    IML sob <b>NIC 00967</b>, uma criança do sexo feminino, procedente de Bairro Nísia Floresta RN e não
+                    IML sob <b>NIC <?php echo $numero_nic; ?></b>, <?php echo $cadaver_informacao; ?>, procedente do <?php echo $procedencia_barrio . " " . $procedencia_cidade . " " . $procedencia_uf; ?> e não
                     foi submetido a Exame de Confronto Necropapiloscópico por não apresentarem até o momento, documentos
                     com padrões dactiloscópicos que confirmem a Identidade Civil do(a) mesmo(a). Foram realizados
                     pesquisas no nosso banco de dados civil e não foi localizado nenhum registro referente ao citado
@@ -271,7 +271,7 @@ function mesData($mes_num)
         <div class="row">
             <div class="col-sm-12 paragrafo">
                 <p>
-                    Diante do exposto o signatário informa que o cadáver, <b>NIC 00967 <u style="color: red">NÃO FOI
+                    Diante do exposto o signatário informa que o cadáver, <b>NIC <?php echo $numero_nic; ?> <u style="color: red">NÃO FOI
                             IDENTIFICADO(A) PELO SISTEMA DACTILOSCÓPICO.</u></b>
                 </p>
             </div>
@@ -279,15 +279,15 @@ function mesData($mes_num)
         <br><br>
         <div class="row">
             <div class="col datacao">
-                <p>Natal/RN, 00/00/0000</p>
+                <p>Natal/RN, <?php echo dataEmPortugues(time()); ?></p>
             </div>
         </div>
         <br>
         <div class="row ">
             <div class="col assinatura">
-                <p><b>NOME DA PESSOA AQUI</b></p>
-                <p>Cargo da pessoa aqui</p>
-                <p>Mat 00.00-0</p>
+                <p><b><?php echo $perito_nome . " " . $perito_sobrenome; ?></b></p>
+                <p><?php echo $perito_cargo; ?></p>
+                <p>Mat <?php echo $perito_matricula; ?></p>
             </div>
         </div>
     </div>
