@@ -196,6 +196,34 @@ function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon"
         return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano;
     }
 }
+
+function mesData($mes_num){
+    if ($mes_num == "01") {
+        return "Janeiro";
+    } elseif ($mes_num == "02") {
+        return "Fevereiro";
+    } elseif ($mes_num == "03") {
+        return "Março";
+    } elseif ($mes_num == "04") {
+        return "Abril";
+    } elseif ($mes_num == "05") {
+        return "Maio";
+    } elseif ($mes_num == "06") {
+        return "Junho";
+    } elseif ($mes_num == "07") {
+        return "Julho";
+    } elseif ($mes_num == "08") {
+        return "Agosto";
+    } elseif ($mes_num == "09") {
+        return "Setembro";
+    } elseif ($mes_num == "10") {
+        return "Outubro";
+    } elseif ($mes_num == "11") {
+        return "Novembro";
+    } else {
+        return "Dezembro";
+    }
+}
 ?>
 
 <body class="A4">
@@ -220,7 +248,7 @@ function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon"
         <div class="row">
             <div class="col-sm-12 paragrafo">
                 <p>
-                    Em, <b><?php echo $entrada_dia; ?> de <?php echo $entrada_mes; ?> de <?php echo $entrada_ano; ?></b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
+                    Em, <b><?php echo $entrada_dia; ?> de <?php echo mesData($entrada_mes); ?> de <?php echo $entrada_ano; ?></b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
                     conformidade com a legalidade vigente na Portaria nº 119/2012 - GS/SESED informa que o cadáver registrado no Instituto de Medicina Legal - IML sob <b>NIC
                         <?php echo $numero_nic; ?></b>, procedente do <?php echo $procedencia_barrio . " " . $procedencia_cidade . " " . $procedencia_uf; ?>, <b><u>não apresentava condições à coleta de Impressões
                             Digitais</u></b> com a qualidade mínima necessária ao confronto necropapiloscópico devido à sépsemia.
