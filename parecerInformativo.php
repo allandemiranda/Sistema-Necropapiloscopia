@@ -14,7 +14,7 @@ if (!$conn) {
 $sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
 $result = mysqli_query($conn, $sql);
 
-$perito_nome = $protocolo = $protocolo_ano = $entrada_dia = $entrada_mes = $entrada_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
+$perito_nome = $protocolo = $protocolo_ano = $doc_dia = $doc_mes = $doc_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
@@ -23,9 +23,10 @@ if (mysqli_num_rows($result) > 0) {
         $protocolo = str_pad($row["id"], 4, '0', STR_PAD_LEFT);
         $data_entrada_ex = explode("-", $row["data_entrada"]);
         $protocolo_ano = $data_entrada_ex[0];
-        $entrada_dia = $data_entrada_ex[2];
-        $entrada_mes = $data_entrada_ex[1];
-        $entrada_ano = $data_entrada_ex[0];
+        $data_doc_ex = explode("-", $row["data_formulario"]);
+        $doc_dia = $data_doc_ex[2];
+        $doc_mes = $data_doc_ex[1];
+        $doc_ano = $data_doc_ex[0];
         $numero_nic = $row["numero_nic"];
         $procedencia_barrio = $row["procedencia_bairro"];
         $procedencia_cidade = $row["procedencia_cidade"];
@@ -249,7 +250,7 @@ function mesData($mes_num)
         <div class="row">
             <div class="col-sm-12 paragrafo">
                 <p>
-                    Em, <b><?php echo $entrada_dia; ?> de <?php echo mesData($entrada_mes); ?> de <?php echo $entrada_ano; ?></b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
+                    Em, <b><?php echo $doc_dia; ?> de <?php echo mesData($doc_mes); ?> de <?php echo $doc_ano; ?></b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
                     conformidade com a legalidade vigente na Portaria nº 119/2012 - GS/SESED informa que o cadáver registrado no Instituto de Medicina Legal - IML sob <b>NIC
                         <?php echo $numero_nic; ?></b>, procedente do <?php echo $procedencia_barrio . " " . $procedencia_cidade . " " . $procedencia_uf; ?>, <b><u>não apresentava condições à coleta de Impressões
                             Digitais</u></b> com a qualidade mínima necessária ao confronto necropapiloscópico devido à sépsemia.
