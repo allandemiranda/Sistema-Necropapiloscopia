@@ -45,7 +45,7 @@ protegePagina(); // Chama a função que protege a página
 												die("Connection failed: " . mysqli_connect_error());
 											}
 
-											$sql = "SELECT * FROM documentos";
+											$sql = "SELECT * FROM documentos ORDER BY id DESC";
 											$result = mysqli_query($conn, $sql);
 											$cont_page = 0;
 											if ($_GET["page"] == "") {
