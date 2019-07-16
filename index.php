@@ -65,7 +65,7 @@ protegePagina(); // Chama a função que protege a página
 										die("Connection failed: " . mysqli_connect_error());
 									}
 
-									$sql = "SELECT id FROM documentos WHERE perito=" . $_SESSION['usuarioNome'];
+									$sql = "SELECT id FROM documentos WHERE perito='" . $_SESSION['usuarioNome']."'";
 									$result = mysqli_query($conn, $sql);
 
 									?>
@@ -155,7 +155,7 @@ protegePagina(); // Chama a função que protege a página
 												die("Connection failed: " . mysqli_connect_error());
 											}
 
-											$sql = "SELECT * FROM documentos";
+											$sql = "SELECT * FROM documentos ORDER BY id DESC";
 											$result = mysqli_query($conn, $sql);
 											$cont_index = 1;
 											if (mysqli_num_rows($result) > 0) {
