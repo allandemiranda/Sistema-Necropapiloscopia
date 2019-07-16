@@ -125,6 +125,78 @@ if (mysqli_num_rows($result) > 0) {
 
 mysqli_close($conn);
 ?>
+<?php
+/**
+ * Converter TimeStamp para data em Português
+ *
+ * @param integer $timestamp Unix timestamp
+ * @param boolean $hours Se "true" devolve também as horas
+ * @param string $timeZone Zona a utilizar para gerar as horas
+ *
+ * @return string
+ */
+function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon")
+{
+
+    $dia_num = date("w", $timestamp); // Dia da semana.
+
+    if ($dia_num == 0) {
+        $dia_nome = "Domingo";
+    } elseif ($dia_num == 1) {
+        $dia_nome = "Segunda";
+    } elseif ($dia_num == 2) {
+        $dia_nome = "Terça";
+    } elseif ($dia_num == 3) {
+        $dia_nome = "Quarta";
+    } elseif ($dia_num == 4) {
+        $dia_nome = "Quinta";
+    } elseif ($dia_num == 5) {
+        $dia_nome = "Sexta";
+    } else {
+        $dia_nome = "Sábado";
+    }
+
+    $dia_mes = date("d", $timestamp); // Dia do mês
+
+    $mes_num = date("m", $timestamp); // Nome do mês
+
+    if ($mes_num == 01) {
+        $mes_nome = "Janeiro";
+    } elseif ($mes_num == 02) {
+        $mes_nome = "Fevereiro";
+    } elseif ($mes_num == 03) {
+        $mes_nome = "Março";
+    } elseif ($mes_num == 04) {
+        $mes_nome = "Abril";
+    } elseif ($mes_num == 05) {
+        $mes_nome = "Maio";
+    } elseif ($mes_num == 06) {
+        $mes_nome = "Junho";
+    } elseif ($mes_num == 07) {
+        $mes_nome = "Julho";
+    } elseif ($mes_num == 08) {
+        $mes_nome = "Agosto";
+    } elseif ($mes_num == 09) {
+        $mes_nome = "Setembro";
+    } elseif ($mes_num == 10) {
+        $mes_nome = "Outubro";
+    } elseif ($mes_num == 11) {
+        $mes_nome = "Novembro";
+    } else {
+        $mes_nome = "Dezembro";
+    }
+    $ano = date("Y", $timestamp); // Ano
+
+    date_default_timezone_set($timeZone); // Set time-zone
+    $hora = date("H:i", $timestamp);
+
+    if ($hours) {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano . " - " . $hora;
+    } else {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano;
+    }
+}
+?>
 
 <body class="A4">
     <div class="container">
@@ -158,7 +230,7 @@ mysqli_close($conn);
         <br><br>
         <div class="row">
             <div class="col datacao">
-                <p>Natal/RN, <?php echo date('d/m/y') ?></p>
+                <p>Natal/RN, <?php echo dataEmPortugues(time()); ?></p>
             </div>
         </div>
         <br>
