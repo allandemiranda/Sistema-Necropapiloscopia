@@ -14,8 +14,6 @@ if (!$conn) {
 $sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
 $result = mysqli_query($conn, $sql);
 
-//$perito_nome = $protocolo = $protocolo_ano = $doc_dia = $doc_mes = $doc_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
-
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while ($row = mysqli_fetch_assoc($result)) {
