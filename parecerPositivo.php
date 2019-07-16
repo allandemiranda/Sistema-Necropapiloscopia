@@ -15,7 +15,7 @@ $sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
 $result = mysqli_query($conn, $sql);
 
 $entrada_ano = $entrada_mes = $entrada_dia = $nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento_dia = $data_nascimento_mes = $data_nascimento_ano = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = $perito_nome = $protocolo = $protocolo_ano = $doc_dia = $doc_mes = $doc_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
-
+echo "AQUI";
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while ($row = mysqli_fetch_assoc($result)) {
@@ -23,7 +23,7 @@ if (mysqli_num_rows($result) > 0) {
         $protocolo = str_pad($row["id"], 4, '0', STR_PAD_LEFT);
         $data_entrada_ex = explode("-", $row["data_entrada"]);
         $protocolo_ano = $data_entrada_ex[0];
-        $entrada_ano = $protocolo_ano;
+        $entrada_ano = $data_entrada_ex[0];
         $entrada_mes = $data_entrada_ex[1];
         $entrada_dia = $data_entrada_ex[2];
         $data_doc_ex = explode("-", $row["data_formulario"]);
