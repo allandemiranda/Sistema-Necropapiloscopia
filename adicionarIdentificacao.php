@@ -5,7 +5,13 @@ include("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
 ?>
 <?php
-$protocolo = $ano_protocolo = $_GET["protocolo"];
+$protocolo = $ano_protocolo = "";
+if($_GET["protocolo"] != ""){
+	$protocolo = $_GET["protocolo"];
+}
+if($_POST["protocolo"] != ""){
+	$protocolo = $_POST["protocolo"];
+}
 $servername = "localhost";
 $username = "root";
 $password = "itep123";
@@ -18,7 +24,7 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT data_entrada FROM documentos WHERE id=" . $_GET["protocolo"];
+$sql = "SELECT data_entrada FROM documentos WHERE id=" . $protocolo;
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -28,7 +34,7 @@ if (mysqli_num_rows($result) > 0) {
 		$ano_protocolo = $data_entrada_ex[0];
 	}
 } else {
-	echo "0 results";
+	// echo "0 results";
 }
 
 mysqli_close($conn);
@@ -102,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 						<form action="adicionarIdentificacao.php" method="POST">
 							<div class="clearfix"> </div>
 							<div class="typo-buttons col-md-12 grid_4">
-								<input name="protocolo_id" value="<?php echo $protocolo; ?>" type="hidden">
+								<input name="protocolo" value="<?php echo $protocolo; ?>" type="hidden">
 								<div class="col-md-12 well">
 									<label class="col-md-4">Protocolo Parecer </label>
 									<input class="col-md-2" type="text" value="<?php echo str_pad($protocolo, 4, '0', STR_PAD_LEFT) . "/" . $ano_protocolo; ?>" disabled>
