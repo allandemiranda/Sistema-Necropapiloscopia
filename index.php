@@ -154,7 +154,7 @@ protegePagina(); // Chama a função que protege a página
 											if (!$conn) {
 												die("Connection failed: " . mysqli_connect_error());
 											}
-											$sql = "SELECT id FROM documentos WHERE perito='" . $_SESSION['usuarioNome'] . "' ORDER BY id DESC";
+											$sql = "SELECT * FROM documentos WHERE perito='" . $_SESSION['usuarioNome'] . "' ORDER BY id DESC";
 											$result = mysqli_query($conn, $sql);
 											$cont_index = 1;
 											if (mysqli_num_rows($result) > 0) {
