@@ -1,3 +1,192 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "itep123";
+$dbname = "itep_necro";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM documentos WHERE id='" . $_GET["protocolo"] . "'";
+$result = mysqli_query($conn, $sql);
+
+$entrada_ano = $entrada_mes = $entrada_dia = $nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento_dia = $data_nascimento_mes = $data_nascimento_ano = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = $perito_nome = $protocolo = $protocolo_ano = $doc_dia = $doc_mes = $doc_ano = $numero_nic = $procedencia_barrio = $procedencia_cidade = $procedencia_uf = "";
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $perito_nome = $row["perito"];
+        $protocolo = str_pad($row["id"], 4, '0', STR_PAD_LEFT);
+        $data_entrada_ex = explode("-", $row["data_entrada"]);
+        $protocolo_ano = $data_entrada_ex[0];
+        $entrada_ano = $protocolo_ano;
+        $entrada_mes = $data_entrada_ex[1];
+        $entrada_dia = $data_entrada_ex[2];
+        $data_doc_ex = explode("-", $row["data_formulario"]);
+        $doc_dia = $data_doc_ex[2];
+        $doc_mes = $data_doc_ex[1];
+        $doc_ano = $data_doc_ex[0];
+        $numero_nic = $row["numero_nic"];
+        $procedencia_barrio = $row["procedencia_bairro"];
+        $procedencia_cidade = $row["procedencia_cidade"];
+        $procedencia_uf = $row["procedencia_uf"];
+        $nome_completo = test_input($row['nome_completo']);
+        $nome_pai = test_input($row["nome_pai"]);
+        $nome_mae = test_input($row["nome_mae"]);
+        $naturalidade_cidade = test_input($row["naturalidade_cidade"]);
+        $naturalidade_uf = test_input($row["naturalidade_uf"]);
+        $data_nascimento = explode("-", $row["data_nascimento"]);
+        $data_nascimento_dia = $data_nascimento[2];
+        $data_nascimento_mes = $data_nascimento[1];
+        $data_nascimento_ano = $data_nascimento[0];
+        $docuemnto_tipo = test_input($row["docuemnto_tipo"]);
+        $docuemnto_numero = test_input($row["docuemnto_numero"]);
+        $docuemnto_orgao = test_input($row["docuemnto_orgao"]);
+        $docuemnto_uf = test_input($row["docuemnto_uf"]);
+        $observacoes = test_input($row["observacoes"]);
+    }
+} else {
+    //echo "0 results";
+}
+
+mysqli_close($conn);
+?>
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "itep123";
+$dbname = "itep_necro";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM usuarios WHERE nome='" . $perito_nome . "'";
+$result = mysqli_query($conn, $sql);
+
+$perito_sobrenome = $perito_cargo = $matricula = "";
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        $perito_sobrenome = $row["sobre_nome"];
+        $perito_cargo = $row["cargo"];
+        $perito_matricula = $row["matricula"];
+    }
+} else {
+    //echo "0 results";
+}
+
+mysqli_close($conn);
+?>
+<?php
+/**
+ * Converter TimeStamp para data em Português
+ *
+ * @param integer $timestamp Unix timestamp
+ * @param boolean $hours Se "true" devolve também as horas
+ * @param string $timeZone Zona a utilizar para gerar as horas
+ *
+ * @return string
+ */
+function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon")
+{
+
+    $dia_num = date("w", $timestamp); // Dia da semana.
+
+    if ($dia_num == 0) {
+        $dia_nome = "Domingo";
+    } elseif ($dia_num == 1) {
+        $dia_nome = "Segunda";
+    } elseif ($dia_num == 2) {
+        $dia_nome = "Terça";
+    } elseif ($dia_num == 3) {
+        $dia_nome = "Quarta";
+    } elseif ($dia_num == 4) {
+        $dia_nome = "Quinta";
+    } elseif ($dia_num == 5) {
+        $dia_nome = "Sexta";
+    } else {
+        $dia_nome = "Sábado";
+    }
+
+    $dia_mes = date("d", $timestamp); // Dia do mês
+
+    $mes_num = date("m", $timestamp); // Nome do mês
+
+    if ($mes_num == "01") {
+        $mes_nome = "Janeiro";
+    } elseif ($mes_num == "02") {
+        $mes_nome = "Fevereiro";
+    } elseif ($mes_num == "03") {
+        $mes_nome = "Março";
+    } elseif ($mes_num == "04") {
+        $mes_nome = "Abril";
+    } elseif ($mes_num == "05") {
+        $mes_nome = "Maio";
+    } elseif ($mes_num == "06") {
+        $mes_nome = "Junho";
+    } elseif ($mes_num == "07") {
+        $mes_nome = "Julho";
+    } elseif ($mes_num == "08") {
+        $mes_nome = "Agosto";
+    } elseif ($mes_num == "09") {
+        $mes_nome = "Setembro";
+    } elseif ($mes_num == "10") {
+        $mes_nome = "Outubro";
+    } elseif ($mes_num == "11") {
+        $mes_nome = "Novembro";
+    } else {
+        $mes_nome = "Dezembro";
+    }
+    $ano = date("Y", $timestamp); // Ano
+
+    date_default_timezone_set($timeZone); // Set time-zone
+    $hora = date("H:i", $timestamp);
+
+    if ($hours) {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano . " - " . $hora;
+    } else {
+        return $dia_nome . ", " . $dia_mes . " de " . $mes_nome . " de " . $ano;
+    }
+}
+
+function mesData($mes_num)
+{
+    if ($mes_num == "01") {
+        return "Janeiro";
+    } elseif ($mes_num == "02") {
+        return "Fevereiro";
+    } elseif ($mes_num == "03") {
+        return "Março";
+    } elseif ($mes_num == "04") {
+        return "Abril";
+    } elseif ($mes_num == "05") {
+        return "Maio";
+    } elseif ($mes_num == "06") {
+        return "Junho";
+    } elseif ($mes_num == "07") {
+        return "Julho";
+    } elseif ($mes_num == "08") {
+        return "Agosto";
+    } elseif ($mes_num == "09") {
+        return "Setembro";
+    } elseif ($mes_num == "10") {
+        return "Outubro";
+    } elseif ($mes_num == "11") {
+        return "Novembro";
+    } else {
+        return "Dezembro";
+    }
+}
+?>
 <!DOCTYPE HTML>
 <html>
 
@@ -5,17 +194,10 @@
     <title>Sistema Necropapiloscopia </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Sistema, documentos" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style>
         .A4 {
             background-color: #ffffff;
@@ -79,18 +261,18 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-sm-10 titulo alert alert-success">
-                <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº 0000/0000</b>
+                <b>INFORMAÇÃO TÉCNICA NECROPAPILOSCÓPICA Nº <?php echo $protocolo; ?>/<?php echo $protocolo_ano; ?></b>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 paragrafo">
                 <p>
-                    Em, <b>09 de Julho de 2019</b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
+                    Em, <b><?php echo $doc_dia; ?> de <?php echo mesData($doc_mes); ?> de <?php echo $doc_ano; ?></b> o Instituto de Identificação do Rio Grande do Norte - IIRN, em
                     conformidade com a legalidade vigente na Portaria nº 119/2012 - GS/SESED informa que, após coletas
                     das
-                    impressões digitais no cadáver registrado no Instituto de Medicina Legal - IML sob <b>NIC 04381</b>
+                    impressões digitais no cadáver registrado no Instituto de Medicina Legal - IML sob <b>NIC <?php echo $numero_nic; ?></b>
                     foram submetidos a Exame de Confronto Necropapiloscópico com as impressões digitais provenientes
-                    do(a), <b>RG 1.664.730 SSP/RN</b> conforme dados qualificativos a seguir:
+                    do(a), <b><?php echo $docuemnto_tipo . " " . $docuemnto_numero . " " . $docuemnto_orgao . "/" . $docuemnto_uf; ?></b> conforme dados qualificativos a seguir:
                 </p>
             </div>
         </div>
@@ -99,55 +281,55 @@
                 <p><b>DATA DE ENTRADA:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>09/07/2019</p>
+                <p><?php echo $entrada_dia . "/" . $entrada_mes . "/" . $entrada_ano; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>PROCEDÊNCIA:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>BAIRRO CIDADE UF</p>
+                <p><?php echo $procedencia_barrio . " " . $procedencia_cidade . " " . $procedencia_uf; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>NOME COMPLETO:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>MAELDE ROSA DE ALMEIDA</p>
+                <p><?php echo $nome_completo; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>NOME DO PAI:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>LUIZ MARTINS DA SILVA</p>
+                <p><?php echo $nome_pai; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>NOME DA MÃE:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>ALZENIR ESTEVAO DE ALMEIDA</p>
+                <p><?php echo $nome_mae; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>NATURALIDADE:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>CAMPO GRANDE RN</p>
+                <p><?php echo $naturalidade_cidade . " " . $naturalidade_uf; ?> </p>
             </div>
             <div class="col-sm-4">
                 <p><b>DATA DE NASCIMENTO:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>15/01/1978</p>
+                <p><?php echo $data_nascimento_dia . "/" . $data_nascimento_mes . "/" . $data_nascimento_ano; ?></p>
             </div>
             <div class="col-sm-4">
                 <p><b>DOC. APRESENTADO:</b></p>
             </div>
             <div class="col-sm-8">
-                <p>RG 1.664.730 SSP RN</p>
+                <p><?php echo $docuemnto_tipo . " " . $docuemnto_numero . " " . $docuemnto_orgao . "/" . $docuemnto_uf; ?></p>
             </div>
             <div class="col-sm-4" style="color: red">
                 <p><b><u>OBSERVAÇÃO:</u></b></p>
             </div>
             <div class="col-sm-8" style="color: red">
-                <p>ENFORCAMENTO</p>
+                <p><?php echo $observacoes; ?></p>
             </div>
         </div>
         <div class="row">
@@ -161,15 +343,15 @@
         <br><br>
         <div class="row">
             <div class="col datacao">
-                <p>Natal/RN, 00/00/0000</p>
+                <p>Natal/RN, <?php echo dataEmPortugues(time()); ?></p>
             </div>
         </div>
         <br>
         <div class="row ">
             <div class="col assinatura">
-                <p><b>NOME DA PESSOA AQUI</b></p>
-                <p>Cargo da pessoa aqui</p>
-                <p>Mat 00.00-0</p>
+                <p><b><?php echo $perito_nome . " " . $perito_sobrenome; ?></b></p>
+                <p><?php echo $perito_cargo; ?></p>
+                <p>Mat <?php echo $perito_matricula; ?></p>
             </div>
         </div>
     </div>
