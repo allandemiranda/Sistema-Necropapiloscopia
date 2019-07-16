@@ -32,20 +32,20 @@ if (mysqli_num_rows($result) > 0) {
         $procedencia_barrio = $row["procedencia_bairro"];
         $procedencia_cidade = $row["procedencia_cidade"];
         $procedencia_uf = $row["procedencia_uf"];
-        // $nome_completo = test_input($row['nome_completo']);
-        // $nome_pai = test_input($row["nome_pai"]);
-        // $nome_mae = test_input($row["nome_mae"]);
-        // $naturalidade_cidade = test_input($row["naturalidade_cidade"]);
-        // $naturalidade_uf = test_input($row["naturalidade_uf"]);
-        // $data_nascimento = explode("-", $row["data_nascimento"]);
-        // $data_nascimento_dia = $data_nascimento[2];
-        // $data_nascimento_mes = $data_nascimento[1];
-        // $data_nascimento_ano = $data_nascimento[0];
-        // $docuemnto_tipo = test_input($row["docuemnto_tipo"]);
-        // $docuemnto_numero = test_input($row["docuemnto_numero"]);
-        // $docuemnto_orgao = test_input($row["docuemnto_orgao"]);
-        // $docuemnto_uf = test_input($row["docuemnto_uf"]);
-        // $observacoes = test_input($row["observacoes"]);
+        $nome_completo = $row['nome_completo'];
+        $nome_pai = $row["nome_pai"];
+        $nome_mae = $row["nome_mae"];
+        $naturalidade_cidade = $row["naturalidade_cidade"];
+        $naturalidade_uf = $row["naturalidade_uf"];
+        $data_nascimento = explode("-", $row["data_nascimento"]);
+        $data_nascimento_dia = $data_nascimento[2];
+        $data_nascimento_mes = $data_nascimento[1];
+        $data_nascimento_ano = $data_nascimento[0];
+        $docuemnto_tipo = $row["docuemnto_tipo"];
+        $docuemnto_numero = $row["docuemnto_numero"];
+        $docuemnto_orgao = $row["docuemnto_orgao"];
+        $docuemnto_uf = $row["docuemnto_uf"];
+        $observacoes = $row["observacoes"];
     }
 } else {
     //echo "0 results";
