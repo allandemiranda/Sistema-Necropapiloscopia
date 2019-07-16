@@ -48,7 +48,7 @@ function test_input($data)
 	return $data;
 }
 
-$perito=$nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = "";
+$perito = $nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$perito = test_input($_SESSION['usuarioNome']);
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	$sql = "UPDATE `documentos` SET `perito`='" . $perito . "',`nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "' WHERE id=" . $protocolo . "";
+	$sql = "UPDATE `documentos` SET `perito`='" . $perito . "',`nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "',`data_formulario`='" . date("Y-m-d") . "' WHERE id=" . $protocolo . "";
 }
 ?>
 <?php include 'head.php'; ?>

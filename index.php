@@ -137,6 +137,7 @@ protegePagina(); // Chama a função que protege a página
 												<th>Nome</th>
 												<th>Entrada</th>
 												<th>Status</th>
+												<th>Data Doc.</th>
 												<th>Papiloscopista</th>
 												<th>Imprimir</th>
 											</tr>
@@ -176,15 +177,18 @@ protegePagina(); // Chama a função que protege a página
 													echo "<td>" . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . "</td>";
 													if ($row["status_coleta"] == 1) {
 														echo '<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>';
+														echo '<td>' . $row["data_formulario"] . '</td>';
 														echo "<td>" . $row["perito"] . "</td>";
 														echo '<td><a href="parecerInformativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
 													} else {
 														if ($row["nome_completo"] == "") {
 															echo '<td><a href="adicionarIdentificacao.php?protocolo=' . $row["id"] . '" <span class="label label-warning">Sem Identificação</span></a></td>';
+															echo '<td>' . $row["data_formulario"] . '</td>';
 															echo "<td>" . $row["perito"] . "</td>";
 															echo '<td><a href="parecerNegativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
 														} else {
 															echo '<td><span class="label label-success">Identificado</span></td>';
+															echo '<td>' . $row["data_formulario"] . '</td>';
 															echo "<td>" . $row["perito"] . "</td>";
 															echo '<td><a href="parecerPositivo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
 														}
