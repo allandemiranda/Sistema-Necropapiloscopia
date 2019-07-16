@@ -6,10 +6,10 @@ protegePagina(); // Chama a função que protege a página
 ?>
 <?php
 $protocolo = $ano_protocolo = "";
-if($_GET["protocolo"] != ""){
+if ($_GET["protocolo"] != "") {
 	$protocolo = $_GET["protocolo"];
 }
-if($_POST["protocolo"] != ""){
+if ($_POST["protocolo"] != "") {
 	$protocolo = $_POST["protocolo"];
 }
 $servername = "localhost";
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							if (mysqli_query($conn, $sql)) {
 								echo '<div class="alert alert-success alert-dismissable">';
 								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-								echo 'Sucesso! Identificaçao adicionada a Nº 0000/0000.';
+								echo 'Sucesso! Identificaçao adicionada a ' . $protocolo . '.';
 								echo '</div>';
 							} else {
 								echo '<div class="alert alert-danger alert-dismissable">';
@@ -115,44 +115,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome Completo </label>
-									<input name="nome_completo" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="nome_completo" class="col-md-8" type="text" value="<?php echo $nome_completo; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome do Pai </label>
-									<input name="nome_pai" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="nome_pai" class="col-md-8" type="text" value="<?php echo $nome_pai; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Nome da Mãe </label>
-									<input name="nome_mae" class="col-md-8" type="text" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="nome_mae" class="col-md-8" type="text" value="<?php echo $nome_mae; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Naturalidade </label>
-									<input name="naturalidade_cidade" class="col-md-7" type="text" placeholder="Cidade" onChange="javascript:this.value=this.value.toUpperCase();" required>
-									<input name="naturalidade_uf" class="col-md-1" type="text" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="naturalidade_cidade" class="col-md-7" type="text" value="<?php echo $naturalidade_cidade; ?>" placeholder="Cidade" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="naturalidade_uf" class="col-md-1" type="text" value="<?php echo $naturalidade_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Data de Nascimento </label>
-									<input name="data_nascimento" class="col-md-2" type="date" required>
+									<input name="data_nascimento" class="col-md-2" type="date" value="<?php echo $data_nascimento; ?>" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Documento Apresentado </label>
 									<select name="docuemnto_tipo" class="col-md-2" type="text">
-										<option>RG</option>
-										<option>CTPS</option>
-										<option>PRONT. CIVIL</option>
-										<option>RESERVISTA</option>
+										<?php
+										if ($docuemnto_tipo == "RG") {
+											echo '<option value="RG" selected>RG</option>';
+										} else {
+											echo '<option value="RG">RG</option>';
+										}
+										if ($docuemnto_tipo == "CTPS") {
+											echo '<option value="CTPS" selected>CTPS</option>';
+										} else {
+											echo '<option value="CTPS">CTPS</option>';
+										}
+										if ($docuemnto_tipo == "PRONT. CIVIL") {
+											echo '<option value="PRONT. CIVIL" selected>PRONT. CIVIL</option>';
+										} else {
+											echo '<option value="PRONT. CIVIL">PRONT. CIVIL</option>';
+										}
+										if ($docuemnto_tipo == "RESERVISTA") {
+											echo '<option value="RESERVISTA" selected>RESERVISTA</option>';
+										} else {
+											echo '<option value="RESERVISTA">RESERVISTA</option>';
+										}
+										?>
 									</select>
-									<input name="docuemnto_numero" class="col-md-3" type="text" placeholder="nº" required>
-									<input name="docuemnto_oragao" class="col-md-2" type="text" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
-									<input name="docuemnto_uf" class="col-md-1" type="text" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="docuemnto_numero" class="col-md-3" type="text" value="<?php echo $docuemnto_numero; ?>" placeholder="nº" required>
+									<input name="docuemnto_oragao" class="col-md-2" type="text" value="<?php echo $docuemnto_orgao; ?>" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
+									<input name="docuemnto_uf" class="col-md-1" type="text" value="<?php echo $docuemnto_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Observações </label>
-									<textarea name="observacoes" class="col-md-8" onChange="javascript:this.value=this.value.toUpperCase();"></textarea>
+									<textarea name="observacoes" class="col-md-8" value="<?php echo $observacoes; ?>" onChange="javascript:this.value=this.value.toUpperCase();"></textarea>
 								</div>
 								<div class="grid1">
 									<button type="submit" class="btn btn-1 btn-success">Atualizar</button>
-									<a href="/"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
+									<a href="listaDocumentos.php?page=<?php echo $protocolo ?>"><button type="button" class="btn btn-1 btn-danger">Voltar</button></a>
 								</div>
 							</div>
 						</form>
