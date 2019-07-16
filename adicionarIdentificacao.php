@@ -166,7 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								</div>
 								<div class="col-md-12 well">
 									<label class="col-md-4">Observações </label>
-									<textarea name="observacoes" class="col-md-8" value="<?php echo $observacoes; ?>" onChange="javascript:this.value=this.value.toUpperCase();"></textarea>
+									<textarea name="observacoes" class="col-md-8" onChange="javascript:this.value=this.value.toUpperCase();"><?php echo $observacoes; ?></textarea>
 								</div>
 								<div class="grid1">
 									<button type="submit" class="btn btn-1 btn-success">Atualizar</button>
