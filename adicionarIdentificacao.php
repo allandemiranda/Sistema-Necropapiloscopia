@@ -48,10 +48,11 @@ function test_input($data)
 	return $data;
 }
 
-$nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = "";
+$perito=$nome_completo = $nome_pai = $nome_mae = $naturalidade_cidade = $naturalidade_uf = $data_nascimento = $docuemnto_tipo = $docuemnto_numero = $docuemnto_orgao = $docuemnto_uf = $observacoes = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$nome_completo = test_input($_SESSION['nome_completo']);
+	$perito = test_input($_SESSION['perito']);
+	$nome_completo = test_input($_POST['nome_completo']);
 	$nome_pai = test_input($_POST["nome_pai"]);
 	$nome_mae = test_input($_POST["nome_mae"]);
 	$naturalidade_cidade = test_input($_POST["naturalidade_cidade"]);
@@ -75,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	$sql = "UPDATE `documentos` SET `nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "' WHERE id=" . $protocolo . "";
+	$sql = "UPDATE `documentos` SET `perito`='" . $perito . "',`nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "' WHERE id=" . $protocolo . "";
 }
 ?>
 <?php include 'head.php'; ?>
@@ -109,6 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							<div class="clearfix"> </div>
 							<div class="typo-buttons col-md-12 grid_4">
 								<input name="protocolo" value="<?php echo $protocolo; ?>" type="hidden">
+								<input name="perito" value="<?php echo $_SESSION['usuarioNome']; ?>" type="hidden">
 								<div class="col-md-12 well">
 									<label class="col-md-4">Protocolo Parecer </label>
 									<input class="col-md-2" type="text" value="<?php echo str_pad($protocolo, 4, '0', STR_PAD_LEFT) . "/" . $ano_protocolo; ?>" disabled>
