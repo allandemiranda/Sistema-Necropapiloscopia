@@ -160,27 +160,27 @@ function dataEmPortugues($timestamp, $hours = FALSE, $timeZone = "Europe/Lisbon"
 
     $mes_num = date("m", $timestamp); // Nome do mês
 
-    if ($mes_num == 01) {
+    if ($mes_num == "01") {
         $mes_nome = "Janeiro";
-    } elseif ($mes_num == 02) {
+    } elseif ($mes_num == "02") {
         $mes_nome = "Fevereiro";
-    } elseif ($mes_num == 03) {
+    } elseif ($mes_num == "03") {
         $mes_nome = "Março";
-    } elseif ($mes_num == 04) {
+    } elseif ($mes_num == "04") {
         $mes_nome = "Abril";
-    } elseif ($mes_num == 05) {
+    } elseif ($mes_num == "05") {
         $mes_nome = "Maio";
-    } elseif ($mes_num == 06) {
+    } elseif ($mes_num == "06") {
         $mes_nome = "Junho";
-    } elseif ($mes_num == 07) {
+    } elseif ($mes_num == "07") {
         $mes_nome = "Julho";
-    } elseif ($mes_num == 08) {
+    } elseif ($mes_num == "08") {
         $mes_nome = "Agosto";
-    } elseif ($mes_num == 09) {
+    } elseif ($mes_num == "09") {
         $mes_nome = "Setembro";
-    } elseif ($mes_num == 10) {
+    } elseif ($mes_num == "10") {
         $mes_nome = "Outubro";
-    } elseif ($mes_num == 11) {
+    } elseif ($mes_num == "11") {
         $mes_nome = "Novembro";
     } else {
         $mes_nome = "Dezembro";
