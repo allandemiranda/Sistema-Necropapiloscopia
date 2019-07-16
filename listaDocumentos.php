@@ -88,7 +88,7 @@ protegePagina(); // Chama a função que protege a página
 													echo "</tr>";
 												}
 											} else {
-												echo "0 results";
+												// echo "0 results";
 											}
 
 											mysqli_close($conn);

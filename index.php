@@ -17,7 +17,29 @@ protegePagina(); // Chama a função que protege a página
 						<div class="col-md-4 market-update-gd">
 							<div class="market-update-block clr-block-1">
 								<div class="col-md-8 market-update-left">
-									<h3>83</h3>
+									<?php
+									$servername = "localhost";
+									$username = "root";
+									$password = "itep123";
+									$dbname = "itep_necro";
+
+									// Create connection
+									$conn = mysqli_connect($servername, $username, $password, $dbname);
+									// Check connection
+									if (!$conn) {
+										die("Connection failed: " . mysqli_connect_error());
+									}
+
+									$sql = "SELECT id FROM documentos";
+									$result = mysqli_query($conn, $sql);
+
+									?>
+									<h3>
+										<?php
+										echo mysqli_num_rows($result);
+										mysqli_close($conn);
+										?>
+									</h3>
 									<h4>Doc. Registrados</h4>
 									<p>Emiditos por este setor</p>
 								</div>
@@ -30,7 +52,29 @@ protegePagina(); // Chama a função que protege a página
 						<div class="col-md-4 market-update-gd">
 							<div class="market-update-block clr-block-2">
 								<div class="col-md-8 market-update-left">
-									<h3>135</h3>
+									<?php
+									$servername = "localhost";
+									$username = "root";
+									$password = "itep123";
+									$dbname = "itep_necro";
+
+									// Create connection
+									$conn = mysqli_connect($servername, $username, $password, $dbname);
+									// Check connection
+									if (!$conn) {
+										die("Connection failed: " . mysqli_connect_error());
+									}
+
+									$sql = "SELECT id FROM documentos WHERE perito=" . $_SESSION['usuarioNome'];
+									$result = mysqli_query($conn, $sql);
+
+									?>
+									<h3>
+										<?php
+										echo mysqli_num_rows($result);
+										mysqli_close($conn);
+										?>
+									</h3>
 									<h4>Doc. Registrados</h4>
 									<p>Emitidos por <?php echo $_SESSION['usuarioNome']; ?></p>
 								</div>
@@ -56,7 +100,7 @@ protegePagina(); // Chama a função que protege a página
 										die("Connection failed: " . mysqli_connect_error());
 									}
 
-									$sql = "SELECT * FROM usuarios";
+									$sql = "SELECT id FROM usuarios";
 									$result = mysqli_query($conn, $sql);
 
 									?>
@@ -98,46 +142,53 @@ protegePagina(); // Chama a função que protege a página
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0001/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0003/19 </td>
-												<td>- </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-warning">Sem Identificação</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
-											<tr>
-												<td>0002/19 </td>
-												<td>JOSÉ BARBOSA DA SILVA NETO </td>
-												<td>01/01/2019 </td>
-												<td><span class="label label-success">Identificado</span></td>
-												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
-											</tr>
+										<?php
+											$servername = "localhost";
+											$username = "root";
+											$password = "itep123";
+											$dbname = "itep_necro";
+
+											// Create connection
+											$conn = mysqli_connect($servername, $username, $password, $dbname);
+											// Check connection
+											if (!$conn) {
+												die("Connection failed: " . mysqli_connect_error());
+											}
+
+											$sql = "SELECT * FROM documentos";
+											$result = mysqli_query($conn, $sql);
+																					
+											if (mysqli_num_rows($result) > 0) {
+												// output data of each row
+												while ($row = mysqli_fetch_assoc($result)) {													
+													echo "<tr>";
+													$data_entrada_ex = explode("-", $row["data_entrada"]);
+													echo "<td>" . str_pad($row["id"], 4, '0', STR_PAD_LEFT) . "/" . $data_entrada_ex[0] . "</td>";
+													if ($row["nome_completo"] == "") {
+														echo "<td> - </td>";
+													} else {
+														echo "<td>" . $row["nome_completo"] . "</td>";
+													}
+													echo "<td>" . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . "</td>";
+													if ($row["status_coleta"] == 1) {
+														echo '<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>';
+													} else {
+														if ($row["nome_completo"] == "") {
+															echo '<td><a href="adicionarIdentificacao.php?protocolo=' . $row["id"] . '" <span class="label label-warning">Sem Identificação</span></a></td>';
+														} else {
+															echo '<td><span class="label label-success">Identificado</span></td>';
+														}
+													}
+													echo "<td>" . $row["perito"] . "</td>";
+													echo '<td><i class="fa fa-print"></td>';
+													echo "</tr>";
+												}
+											} else {
+												// echo "0 results";
+											}
+
+											mysqli_close($conn);
+											?>
 										</tbody>
 									</table>
 								</div>

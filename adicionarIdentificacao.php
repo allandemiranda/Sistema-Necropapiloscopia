@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							if (mysqli_query($conn, $sql)) {
 								echo '<div class="alert alert-success alert-dismissable">';
 								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-								echo 'Sucesso! Identificaçao adicionada.';
+								echo 'Sucesso! Identificação adicionada.';
 								echo '</div>';
 							} else {
 								echo '<div class="alert alert-danger alert-dismissable">';
