@@ -110,12 +110,12 @@ if (!$conn) {
 $sql = "SELECT * FROM usuarios WHERE nome='" . $perito_nome . "'";
 $result = mysqli_query($conn, $sql);
 
-$perito_sobrenom = $perito_cargo = $matricula = "";
+$perito_sobrenome = $perito_cargo = $matricula = "";
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while ($row = mysqli_fetch_assoc($result)) {
-        $perito_sobrenom = $row["sobre_nome"];
+        $perito_sobrenome = $row["sobre_nome"];
         $perito_cargo = $row["cargo"];
         $perito_matricula = $row["matricula"];
     }
