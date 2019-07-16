@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$destino_exame = test_input($_POST["destino_exame"]);
 	$numero_sei = test_input($_POST["numero_sei"]);
 	$status_coleta = test_input($_POST["status_coleta"]);
-	$data_formulario = test_input(date("c"));
+	$data_formulario = test_input(date("Y-m-d"));
 
 	if ($status_coleta == "on") {
 		$status_coleta = 1;
