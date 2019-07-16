@@ -14,7 +14,6 @@ function test_input($data)
 }
 
 $perito = $numero_nic = $data_entrada = $cadaver_informacao = $data_fato = $procedencia_bairro = $procedencia_cidade = $procedencia_uf = $cadaver_situacao = $numero_guia = $causa_morte = $destino_exame = $numero_sei = $status_coleta = "";
-// $nome_completo=$nome_pai=$nome_mae=$naturalidade_cidade=$naturalidade_uf=$data_nascimento=$docuemnto_tipo=$docuemnto_numero=$docuemnto_orgao=$docuemnto_uf=$observacoes="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$perito = test_input($_SESSION['usuarioNome']);

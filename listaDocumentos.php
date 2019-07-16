@@ -78,7 +78,7 @@ protegePagina(); // Chama a função que protege a página
 														echo '<td><span class="label label-danger">Sem Condiçoes de Coleta</span></td>';
 													} else {
 														if ($row["nome_completo"] == "") {
-															echo '<td><span class="label label-warning">Sem Identificação</span></td>';
+															echo '<td><a href="adicionarIdentificacao.php?protocolo=' . $row["id"] . '" <span class="label label-warning">Sem Identificação</span></a></td>';
 														} else {
 															echo '<td><span class="label label-success">Identificado</span></td>';
 														}
