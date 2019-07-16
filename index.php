@@ -142,7 +142,7 @@ protegePagina(); // Chama a função que protege a página
 											</tr>
 										</thead>
 										<tbody>
-										<?php
+											<?php
 											$servername = "localhost";
 											$username = "root";
 											$password = "itep123";
@@ -157,10 +157,15 @@ protegePagina(); // Chama a função que protege a página
 
 											$sql = "SELECT * FROM documentos";
 											$result = mysqli_query($conn, $sql);
-																					
+											$cont_index = 1;
 											if (mysqli_num_rows($result) > 0) {
 												// output data of each row
-												while ($row = mysqli_fetch_assoc($result)) {													
+												while ($row = mysqli_fetch_assoc($result)) {
+													if($cont_index == 11){
+														break;
+													} else {
+														$cont_index++;
+													}
 													echo "<tr>";
 													$data_entrada_ex = explode("-", $row["data_entrada"]);
 													echo "<td>" . str_pad($row["id"], 4, '0', STR_PAD_LEFT) . "/" . $data_entrada_ex[0] . "</td>";
