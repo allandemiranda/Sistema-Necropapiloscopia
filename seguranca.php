@@ -70,7 +70,7 @@ function protegePagina()
     global $_SG;
     if (!isset($_SESSION['usuarioID']) or !isset($_SESSION['usuarioNome'])) {
         // Não há usuário logado, manda pra página de login
-        expulsaVisitante();
+        expulsaVisitanteNovo();
     } else if (!isset($_SESSION['usuarioID']) or !isset($_SESSION['usuarioNome'])) {
         // Há usuário logado, verifica se precisa validar o login novamente
         if ($_SG['validaSempre'] == true) {
@@ -92,4 +92,15 @@ function expulsaVisitante()
     unset($_SESSION['usuarioID'], $_SESSION['usuarioNome'], $_SESSION['usuarioLogin'], $_SESSION['usuarioSenha']);
     // Manda pra tela de login
     header("Location: " . $_SG['paginaLogin'] . "?status=erro");
+}
+/**
+ * Função para expulsar um visitante
+ */
+function expulsaVisitanteNovo()
+{
+    global $_SG;
+    // Remove as variáveis da sessão (caso elas existam)
+    unset($_SESSION['usuarioID'], $_SESSION['usuarioNome'], $_SESSION['usuarioLogin'], $_SESSION['usuarioSenha']);
+    // Manda pra tela de login
+    header("Location: " . $_SG['paginaLogin'] . "?status=logout");
 }
