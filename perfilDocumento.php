@@ -97,7 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_mae = test_input($_POST["nome_mae"]);
     $naturalidade_cidade = test_input($_POST["naturalidade_cidade"]);
     $naturalidade_uf = test_input($_POST["naturalidade_uf"]);
-    $data_nascimento = test_input($_POST["data_nascimento"]);
+    if (test_input($_POST["data_nascimento"]) == "") {
+        $data_nascimento = "2000-01-01";
+    } else {
+        $data_nascimento = test_input($_POST["data_nascimento"]);
+    }
     $docuemnto_tipo = test_input($_POST["docuemnto_tipo"]);
     $docuemnto_numero = test_input($_POST["docuemnto_numero"]);
     $docuemnto_orgao = test_input($_POST["docuemnto_orgao"]);
