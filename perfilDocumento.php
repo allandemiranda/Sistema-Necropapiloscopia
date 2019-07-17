@@ -24,7 +24,7 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT data_entrada FROM documentos WHERE id=" . $protocolo;
+$sql = "SELECT * FROM documentos WHERE id=" . $protocolo;
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -32,6 +32,30 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $data_entrada_ex = explode("-", $row["data_entrada"]);
         $ano_protocolo = $data_entrada_ex[0];
+        $numero_nic = $row["numero_nic"];
+        $data_entrada = $row["data_entrada"];
+        $cadaver_informacao = $row["cadaver_informacao"];
+        $data_fato = $row["data_fato"];
+        $procedencia_bairro = $row["procedencia_bairro"];
+        $procedencia_cidade = $row["procedencia_cidade"];
+        $procedencia_uf = $row["procedencia_uf"];
+        $cadaver_situacao = $row["cadaver_situacao"];
+        $numero_guia = $row["numero_guia"];
+        $causa_morte = $row["causa_morte"];
+        $destino_exame = $row["destino_exame"];
+        $numero_sei = $row["numero_sei"];
+        $status_coleta = $row["status_coleta"];
+        $nome_completo = $row["nome_completo"];
+        $nome_pai = $row["nome_pai"];
+        $nome_mae = $row["nome_mae"];
+        $naturalidade_cidade = $row["naturalidade_cidade"];
+        $naturalidade_uf = $row["naturalidade_uf"];
+        $data_nascimento = $row["data_nascimento"];
+        $docuemnto_tipo = $row["docuemnto_tipo"];
+        $docuemnto_numero = $row["docuemnto_numero"];
+        $docuemnto_orgao = $row["docuemnto_orgao"];
+        $docuemnto_uf = $row["docuemnto_uf"];
+        $observacoes = $row["observacoes"];
     }
 } else {
     // echo "0 results";
@@ -225,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </div>
                                 <div class="grid1">
                                     <button type="submit" class="btn btn-1 btn-success">Criar</button>
-                                    <a href="listaDocumentos.php?page=<?php echo $protocolo ?>"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
+                                    <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
                                 </div>
                             </div>
                         </form>
