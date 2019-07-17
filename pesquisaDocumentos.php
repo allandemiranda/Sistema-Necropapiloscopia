@@ -19,6 +19,7 @@ protegePagina(); // Chama a função que protege a página
 								<div class="chit-chat-heading">
 									Documentos Registrados
 								</div>
+								<div class="conteiner">
 								<?php
 								if ($_GET["pesquisa"] == "") {
 									echo '<form action="" method="POST">';
@@ -39,6 +40,7 @@ protegePagina(); // Chama a função que protege a página
 									echo '</form>';
 								}
 								?>
+								</div>
 								<div class="table-responsive">
 									<table class="table table-hover">
 										<thead>
