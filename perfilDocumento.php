@@ -155,9 +155,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <label class="col-md-4">Protocolo Parecer </label>
                                     <input class="col-md-2" type="text" value="<?php echo str_pad($protocolo, 4, '0', STR_PAD_LEFT) . "/" . $ano_protocolo; ?>" disabled>
                                 </div>
-
-
-
                                 <div class="col-md-12 well">
                                     <label class="col-md-4">Nº NIC </label>
                                     <input name="numero_nic" class="col-md-4" type="text" value="<?php echo $numero_nic; ?>" onkeyup="this.value=this.value.replace(/[' ']/g,'')" required>
@@ -209,62 +206,69 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <label class="col-md-11">Não apresenta condições de coleta de Impressões Digitais</label>
                                 </div>
 
-
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Nome Completo </label>
-                                    <input name="nome_completo" class="col-md-8" type="text" value="<?php echo $nome_completo; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Nome do Pai </label>
-                                    <input name="nome_pai" class="col-md-8" type="text" value="<?php echo $nome_pai; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Nome da Mãe </label>
-                                    <input name="nome_mae" class="col-md-8" type="text" value="<?php echo $nome_mae; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Naturalidade </label>
-                                    <input name="naturalidade_cidade" class="col-md-7" type="text" value="<?php echo $naturalidade_cidade; ?>" placeholder="Cidade" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                    <input name="naturalidade_uf" class="col-md-1" type="text" value="<?php echo $naturalidade_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Data de Nascimento </label>
-                                    <input name="data_nascimento" class="col-md-2" type="date" value="<?php echo $data_nascimento; ?>" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Documento Apresentado </label>
-                                    <select name="docuemnto_tipo" class="col-md-2" type="text">
-                                        <?php
-                                        if ($docuemnto_tipo == "RG") {
-                                            echo '<option value="RG" selected>RG</option>';
-                                        } else {
-                                            echo '<option value="RG">RG</option>';
-                                        }
-                                        if ($docuemnto_tipo == "CTPS") {
-                                            echo '<option value="CTPS" selected>CTPS</option>';
-                                        } else {
-                                            echo '<option value="CTPS">CTPS</option>';
-                                        }
-                                        if ($docuemnto_tipo == "PRONT. CIVIL") {
-                                            echo '<option value="PRONT. CIVIL" selected>PRONT. CIVIL</option>';
-                                        } else {
-                                            echo '<option value="PRONT. CIVIL">PRONT. CIVIL</option>';
-                                        }
-                                        if ($docuemnto_tipo == "RESERVISTA") {
-                                            echo '<option value="RESERVISTA" selected>RESERVISTA</option>';
-                                        } else {
-                                            echo '<option value="RESERVISTA">RESERVISTA</option>';
-                                        }
+                                <?php
+                                if ($status_coleta == 0) {
+                                    if ($nome_completo != "") {
                                         ?>
-                                    </select>
-                                    <input name="docuemnto_numero" class="col-md-3" type="text" value="<?php echo $docuemnto_numero; ?>" placeholder="nº" required>
-                                    <input name="docuemnto_orgao" class="col-md-2" type="text" value="<?php echo $docuemnto_orgao; ?>" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                    <input name="docuemnto_uf" class="col-md-1" type="text" value="<?php echo $docuemnto_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
-                                </div>
-                                <div class="col-md-12 well">
-                                    <label class="col-md-4">Observações </label>
-                                    <textarea name="observacoes" class="col-md-8" onChange="javascript:this.value=this.value.toUpperCase();"><?php echo $observacoes; ?></textarea>
-                                </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Nome Completo </label>
+                                            <input name="nome_completo" class="col-md-8" type="text" value="<?php echo $nome_completo; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Nome do Pai </label>
+                                            <input name="nome_pai" class="col-md-8" type="text" value="<?php echo $nome_pai; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Nome da Mãe </label>
+                                            <input name="nome_mae" class="col-md-8" type="text" value="<?php echo $nome_mae; ?>" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Naturalidade </label>
+                                            <input name="naturalidade_cidade" class="col-md-7" type="text" value="<?php echo $naturalidade_cidade; ?>" placeholder="Cidade" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                            <input name="naturalidade_uf" class="col-md-1" type="text" value="<?php echo $naturalidade_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Data de Nascimento </label>
+                                            <input name="data_nascimento" class="col-md-2" type="date" value="<?php echo $data_nascimento; ?>" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Documento Apresentado </label>
+                                            <select name="docuemnto_tipo" class="col-md-2" type="text">
+                                                <?php
+                                                if ($docuemnto_tipo == "RG") {
+                                                    echo '<option value="RG" selected>RG</option>';
+                                                } else {
+                                                    echo '<option value="RG">RG</option>';
+                                                }
+                                                if ($docuemnto_tipo == "CTPS") {
+                                                    echo '<option value="CTPS" selected>CTPS</option>';
+                                                } else {
+                                                    echo '<option value="CTPS">CTPS</option>';
+                                                }
+                                                if ($docuemnto_tipo == "PRONT. CIVIL") {
+                                                    echo '<option value="PRONT. CIVIL" selected>PRONT. CIVIL</option>';
+                                                } else {
+                                                    echo '<option value="PRONT. CIVIL">PRONT. CIVIL</option>';
+                                                }
+                                                if ($docuemnto_tipo == "RESERVISTA") {
+                                                    echo '<option value="RESERVISTA" selected>RESERVISTA</option>';
+                                                } else {
+                                                    echo '<option value="RESERVISTA">RESERVISTA</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                            <input name="docuemnto_numero" class="col-md-3" type="text" value="<?php echo $docuemnto_numero; ?>" placeholder="nº" required>
+                                            <input name="docuemnto_orgao" class="col-md-2" type="text" value="<?php echo $docuemnto_orgao; ?>" placeholder="Orgão" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                            <input name="docuemnto_uf" class="col-md-1" type="text" value="<?php echo $docuemnto_uf; ?>" placeholder="UF" onChange="javascript:this.value=this.value.toUpperCase();" required>
+                                        </div>
+                                        <div class="col-md-12 well">
+                                            <label class="col-md-4">Observações </label>
+                                            <textarea name="observacoes" class="col-md-8" onChange="javascript:this.value=this.value.toUpperCase();"><?php echo $observacoes; ?></textarea>
+                                        </div>
+                                    <?php
+                                    }
+                                }
+                                ?>
                                 <div class="grid1">
                                     <button type="submit" class="btn btn-1 btn-success">Criar</button>
                                     <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
