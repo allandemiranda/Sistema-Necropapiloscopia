@@ -73,6 +73,24 @@ function test_input($data)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $numero_nic = test_input($_SESSION["numero_nic"]);
+    $data_entrada = test_input($_SESSION["data_entrada"]);
+    $cadaver_informacao = test_input($_SESSION["cadaver_informacao"]);
+    $data_fato = test_input($_SESSION["data_fato"]);
+    $procedencia_bairro = test_input($_SESSION["procedencia_bairro"]);
+    $procedencia_cidade = test_input($_SESSION["procedencia_cidade"]);
+    $procedencia_uf = test_input($_SESSION["procedencia_uf"]);
+    $cadaver_situacao = test_input($_SESSION["cadaver_situacao"]);
+    $numero_guia = test_input($_SESSION["numero_guia"]);
+    $causa_morte = test_input($_SESSION["causa_morte"]);
+    $destino_exame = test_input($_SESSION["destino_exame"]);
+    $numero_sei = test_input($_SESSION["numero_sei"]);
+    $status_coleta = "";
+    if ($_SESSION["status_coleta"] == "on") {
+        $status_coleta = 1;
+    } else {
+        $status_coleta = 0;
+    }
     $perito = test_input($_SESSION['usuarioNome']);
     $nome_completo = test_input($_POST['nome_completo']);
     $nome_pai = test_input($_POST["nome_pai"]);
@@ -98,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    $sql = "UPDATE `documentos` SET `perito`='" . $perito . "',`nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "',`data_formulario`='" . date("Y-m-d") . "' WHERE id=" . $protocolo . "";
+    $sql = "UPDATE `documentos` SET `numero_nic`='" . $numero_nic . "',`data_entrada`='" . $data_entrada . "',`cadaver_informacao`='" . $cadaver_informacao . "',`data_fato`='" . $data_fato . "',`procedencia_bairro`='" . $procedencia_bairro . "',`procedencia_cidade`='" . $procedencia_cidade . "',`procedencia_uf`='" . $procedencia_uf . "',`cadaver_situacao`='" . $cadaver_situacao . "',`numero_guia`='" . $numero_guia . "',`causa_morte`='" . $causa_morte . "',`destino_exame`='" . $destino_exame . "',`numero_sei`='" . $numero_sei . "',`status_coleta`='" . $status_coleta . "',`perito`='" . $perito . "',`nome_completo`='" . $nome_completo . "', `nome_pai`='" . $nome_pai . "',`nome_mae`='" . $nome_mae . "', `naturalidade_cidade`='" . $naturalidade_cidade . "',`naturalidade_uf`='" . $naturalidade_uf . "', `data_nascimento`='" . $data_nascimento . "',`docuemnto_tipo`='" . $docuemnto_tipo . "', `docuemnto_numero`='" . $docuemnto_numero . "',`docuemnto_orgao`='" . $docuemnto_orgao . "', `docuemnto_uf`='" . $docuemnto_uf . "',`observacoes`='" . $observacoes . "',`data_formulario`='" . date("Y-m-d") . "' WHERE id=" . $protocolo . "";
 }
 ?>
 <?php include 'head.php'; ?>
