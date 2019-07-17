@@ -94,7 +94,7 @@ function expulsaVisitante()
     header("Location: " . $_SG['paginaLogin'] . "?status=erro");
 }
 /**
- * Função para expulsar um visitante
+ * Função para expulsar um primeiro login
  */
 function expulsaVisitanteNovo()
 {
