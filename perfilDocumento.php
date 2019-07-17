@@ -270,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 }
                                 ?>
                                 <div class="grid1">
-                                    <button type="submit" class="btn btn-1 btn-success">Criar</button>
+                                    <button type="submit" class="btn btn-1 btn-success">Editar</button>
                                     <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Voltar</button></a>
                                 </div>
                             </div>
