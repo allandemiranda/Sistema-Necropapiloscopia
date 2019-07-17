@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (mysqli_query($conn, $sql)) {
                                 echo '<div class="alert alert-success alert-dismissable">';
                                 echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-                                echo 'Sucesso! Adicionado.';
+                                echo 'Sucesso! Modificado.';
                                 echo '</div>';
                             } else {
                                 echo '<div class="alert alert-danger alert-dismissable">';
@@ -271,7 +271,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 ?>
                                 <div class="grid1">
                                     <button type="submit" class="btn btn-1 btn-success">Criar</button>
-                                    <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Cancelar</button></a>
+                                    <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Voltar</button></a>
                                 </div>
                             </div>
                         </form>
