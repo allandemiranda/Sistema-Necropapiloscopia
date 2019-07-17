@@ -68,7 +68,7 @@ protegePagina(); // Chama a função que protege a página
 													}
 													echo "<tr>";
 													$data_entrada_ex = explode("-", $row["data_entrada"]);
-													echo "<td>" . str_pad($row["id"], 4, '0', STR_PAD_LEFT) . "/" . $data_entrada_ex[0] . "</td>";
+													echo "<td><a href='perfilDocumento.php?protocolo=" . $row["id"] . "'>" . str_pad($row["id"], 4, '0', STR_PAD_LEFT) . "/" . $data_entrada_ex[0] . "</a></td>";
 													if ($row["nome_completo"] == "") {
 														echo "<td> - </td>";
 													} else {
