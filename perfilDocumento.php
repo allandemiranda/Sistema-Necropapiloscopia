@@ -73,20 +73,20 @@ function test_input($data)
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $numero_nic = test_input($_SESSION["numero_nic"]);
-    $data_entrada = test_input($_SESSION["data_entrada"]);
-    $cadaver_informacao = test_input($_SESSION["cadaver_informacao"]);
-    $data_fato = test_input($_SESSION["data_fato"]);
-    $procedencia_bairro = test_input($_SESSION["procedencia_bairro"]);
-    $procedencia_cidade = test_input($_SESSION["procedencia_cidade"]);
-    $procedencia_uf = test_input($_SESSION["procedencia_uf"]);
-    $cadaver_situacao = test_input($_SESSION["cadaver_situacao"]);
-    $numero_guia = test_input($_SESSION["numero_guia"]);
-    $causa_morte = test_input($_SESSION["causa_morte"]);
-    $destino_exame = test_input($_SESSION["destino_exame"]);
-    $numero_sei = test_input($_SESSION["numero_sei"]);
+    $numero_nic = test_input($_POST["numero_nic"]);
+    $data_entrada = test_input($_POST["data_entrada"]);
+    $cadaver_informacao = test_input($_POST["cadaver_informacao"]);
+    $data_fato = test_input($_POST["data_fato"]);
+    $procedencia_bairro = test_input($_POST["procedencia_bairro"]);
+    $procedencia_cidade = test_input($_POST["procedencia_cidade"]);
+    $procedencia_uf = test_input($_POST["procedencia_uf"]);
+    $cadaver_situacao = test_input($_POST["cadaver_situacao"]);
+    $numero_guia = test_input($_POST["numero_guia"]);
+    $causa_morte = test_input($_POST["causa_morte"]);
+    $destino_exame = test_input($_POST["destino_exame"]);
+    $numero_sei = test_input($_POST["numero_sei"]);
     $status_coleta = "";
-    if ($_SESSION["status_coleta"] == "on") {
+    if ($_POST["status_coleta"] == "on") {
         $status_coleta = 1;
     } else {
         $status_coleta = 0;
