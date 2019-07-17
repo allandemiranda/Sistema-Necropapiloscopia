@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         ?>
                         <h2>Formulário de Registro</h2>
-                        <form action="novoRegistro.php" method="POST">
+                        <form action="perfilDocumento.php" method="POST">
                             <div class="clearfix"> </div>
                             <div class="typo-buttons col-md-12 grid_4">
                                 <input name="protocolo" value="<?php echo $protocolo; ?>" type="hidden">
