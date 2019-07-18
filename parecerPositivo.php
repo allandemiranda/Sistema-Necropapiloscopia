@@ -1,8 +1,12 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "itep123";
-$dbname = "itep_necro";
+include("seguranca.php"); // Inclui o arquivo com o sistema de segurança
+protegePagina(); // Chama a função que protege a página
+?>
+<?php
+$servername = $_SG['servidor'];
+$username = $_SG['usuario'];
+$password = $_SG['senha'];
+$dbname = $_SG['banco'];
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -54,10 +58,10 @@ if (mysqli_num_rows($result) > 0) {
 mysqli_close($conn);
 ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "itep123";
-$dbname = "itep_necro";
+$servername = $_SG['servidor'];
+$username = $_SG['usuario'];
+$password = $_SG['senha'];
+$dbname = $_SG['banco'];
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);

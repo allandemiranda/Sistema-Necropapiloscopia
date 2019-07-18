@@ -6,10 +6,10 @@ protegePagina(); // Chama a função que protege a página
 ?>
 <?php
 if ($_GET["editar"] != "") {
-	$servername = "localhost";
-	$username = "root";
-	$password = "itep123";
-	$dbname = "itep_necro";
+	$servername = $_SG['servidor'];
+	$username = $_SG['usuario'];
+	$password = $_SG['senha'];
+	$dbname = $_SG['banco'];
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	// Check connection
@@ -19,10 +19,10 @@ if ($_GET["editar"] != "") {
 	$sql = "UPDATE usuarios SET senha='123456' WHERE id=" . $_GET["editar"];
 }
 if ($_GET["excluir"] != "") {
-	$servername = "localhost";
-	$username = "root";
-	$password = "itep123";
-	$dbname = "itep_necro";
+	$servername = $_SG['servidor'];
+	$username = $_SG['usuario'];
+	$password = $_SG['senha'];
+	$dbname = $_SG['banco'];
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	// Check connection
@@ -92,10 +92,10 @@ if ($_GET["excluir"] != "") {
 										</thead>
 										<tbody>
 											<?php
-											$servername = "localhost";
-											$username = "root";
-											$password = "itep123";
-											$dbname = "itep_necro";
+											$servername = $_SG['servidor'];
+											$username = $_SG['usuario'];
+											$password = $_SG['senha'];
+											$dbname = $_SG['banco'];
 
 											// Create connection
 											$conn = mysqli_connect($servername, $username, $password, $dbname);

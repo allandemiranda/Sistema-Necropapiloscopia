@@ -19,10 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$senha = test_input($_POST["senha"]);
 	$cargo = test_input($_POST["cargo"]);
 
-	$servername = "localhost";
-	$username = "root";
-	$password = "itep123";
-	$dbname = "itep_necro";
+	$servername = $_SG['servidor'];
+	$username = $_SG['usuario'];
+	$password = $_SG['senha'];
+	$dbname = $_SG['banco'];
 
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
