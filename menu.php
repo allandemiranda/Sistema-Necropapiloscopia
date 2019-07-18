@@ -17,8 +17,8 @@
                 <ul>
                     <li><a href="novoRegistro.php">Novo</a></li>
                     <li><a href="listaDocumentos.php">Lista</a></li>
-                    <!--li><a href="pesquisaDocumentos.php">Pesquisar</a></li-->
-                    <li><a href="#">Pesquisar</a></li>
+                    <li><a href="pesquisaDocumentos.php">Pesquisar</a></li>
+                    <!--li><a href="#">Pesquisar</a></li-->
                 </ul>
             </li>
             <li><a href="#"><i class="fa fa-cogs"></i><span>Usuários</span><span class="fa fa-angle-right" style="float: right"></span></a>

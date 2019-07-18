@@ -83,20 +83,20 @@ protegePagina(); // Chama a função que protege a página
 														$data_entrada_ex = explode("-", $row["data_formulario"]);
 														echo '<td>' . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . '</td>';
 														echo "<td>" . $row["perito"] . "</td>";
-														echo '<td><a href="parecerInformativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
+														echo '<td><a href="parecerInformativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></i></a></td>';
 													} else {
 														if ($row["nome_completo"] == "") {
 															echo '<td><a href="adicionarIdentificacao.php?protocolo=' . $row["id"] . '" <span class="label label-warning">Sem Identificação</span></a></td>';
 															$data_entrada_ex = explode("-", $row["data_formulario"]);
 															echo '<td>' . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . '</td>';
 															echo "<td>" . $row["perito"] . "</td>";
-															echo '<td><a href="parecerNegativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
+															echo '<td><a href="parecerNegativo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></i></a></td>';
 														} else {
 															echo '<td><span class="label label-success">Identificado</span></td>';
 															$data_entrada_ex = explode("-", $row["data_formulario"]);
 															echo '<td>' . $data_entrada_ex[2] . "/" . $data_entrada_ex[1] . "/" . $data_entrada_ex[0] . '</td>';
 															echo "<td>" . $row["perito"] . "</td>";
-															echo '<td><a href="parecerPositivo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></a></td>';
+															echo '<td><a href="parecerPositivo.php?protocolo=' . $row["id"] . '" target="_blank"><i class="fa fa-print"></i></a></td>';
 														}
 													}
 													echo "</tr>";

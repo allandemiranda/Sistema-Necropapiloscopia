@@ -16,30 +16,41 @@ protegePagina(); // Chama a função que protege a página
 					<div class="typography">
 						<div class="col-md-12 chit-chat-layer1-left">
 							<div class="work-progres">
+								<div class="container-fluid">
+									<?php
+									if ($_GET["pesquisa"] == "") {
+										echo '<form action="" method="POST">';
+										echo '<div class="clearfix"> </div>';
+										echo '<div class="typo-buttons col-md-12 grid_4">';
+										echo '<div class="col-md-12 well">';
+										echo '<label class="col-md-4">Data Inicial </label>';
+										echo '<input name="protocoloPesquisa" class="col-md-4" type="text">';
+										echo '<input name="protocoloPesquisa" class="col-md-2" type="text" placeholder="2000">';
+										echo '</div>';
+										echo '<div class="grid1">';
+										echo '<button type="button" class="btn btn-1 btn-success">Pesquisar por Protocolo</button>';
+										echo '</div>';
+										echo '<br>';
+										echo '</form>';
+										echo '<form action="" method="POST">';
+										echo '<div class="col-md-12 well">';
+										echo '<label class="col-md-4">Data Inicial </label>';
+										echo '<input name="dataInicial" class="col-md-3" type="date" required>';
+										echo '</div>';
+										echo '<div class="col-md-12 well">';
+										echo '<label class="col-md-4">Data Final </label>';
+										echo '<input name="dataFinal" class="col-md-3" type="date" required>';
+										echo '</div>';
+										echo '<div class="grid1">';
+										echo '<button type="button" class="btn btn-1 btn-success">Pesquisar por data</button>';
+										echo '</div>';
+										echo '</div>';
+										echo '</form>';
+									}
+									?>
+								</div>
 								<div class="chit-chat-heading">
 									Documentos Registrados
-								</div>
-								<div class="conteiner">
-								<?php
-								if ($_GET["pesquisa"] == "") {
-									echo '<form action="" method="POST">';
-									echo '<div class="clearfix"> </div>';
-									echo '<div class="typo-buttons col-md-12 grid_4">';
-									echo '<div class="col-md-12 well">';
-									echo '<label class="col-md-4">Data Inicial </label>';
-									echo '<input name="dataInicial" class="col-md-3" type="date" required>';
-									echo '</div>';
-									echo '<div class="col-md-12 well">';
-									echo '<label class="col-md-4">Data Final </label>';
-									echo '<input name="dataFinal" class="col-md-3" type="date" required>';
-									echo '</div>';
-									echo '<div class="grid1">';
-									echo '<button type="button" class="btn btn-1 btn-success">Pesquisar</button>';
-									echo '</div>';
-									echo '</div>';
-									echo '</form>';
-								}
-								?>
 								</div>
 								<div class="table-responsive">
 									<table class="table table-hover">
@@ -60,7 +71,7 @@ protegePagina(); // Chama a função que protege a página
 												<td>01/01/2019 </td>
 												<td><span class="label label-warning">Sem Identificação</span></td>
 												<td>SANDRA</td>
-												<td><i class="fa fa-print"></td>
+												<td><i class="fa fa-print"></i></i></td>
 											</tr>
 										</tbody>
 									</table>
