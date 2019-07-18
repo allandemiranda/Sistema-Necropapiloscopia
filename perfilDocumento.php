@@ -138,8 +138,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             if (mysqli_query($conn, $sql)) {
                                 echo '<div class="alert alert-success alert-dismissable">';
                                 echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-                                echo 'Sucesso! Modificado.';
-                                echo '</div>';
+                                echo 'Sucesso! Editado documentação do <b>PROTOCOLO ' . str_pad($protocolo, 4, '0', STR_PAD_LEFT) . '/' . $ano_protocolo . '</b>.';
+								echo '</div>';                               
                             } else {
                                 echo '<div class="alert alert-danger alert-dismissable">';
                                 echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
@@ -275,7 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 ?>
                                 <div class="grid1">
                                     <button type="submit" class="btn btn-1 btn-success">Editar</button>
-                                    <a href="listaDocumentos.php?page=<?php echo $protocolo; ?>"><button type="button" class="btn btn-1 btn-danger">Voltar</button></a>
+                                    <a href="listaDocumentos.php?pageDoc=<?php echo ($protocolo - 1); ?>"><button type="button" class="btn btn-1 btn-danger">Voltar</button></a>
                                 </div>
                             </div>
                         </form>

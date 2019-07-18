@@ -48,14 +48,17 @@ protegePagina(); // Chama a função que protege a página
 
 											$sql = "SELECT * FROM documentos ORDER BY id DESC";
 											$result = mysqli_query($conn, $sql);
+											$total_pages = mysqli_num_rows($result);
 											$cont_page = 0;
 											if ($_GET["page"] == "") {
 												$cont_page = 1;
 											} else {
 												$cont_page = $_GET["page"];
 											}
-											$num_rows = 0;
-											$total_pages = mysqli_num_rows($result);
+											if($_GET["pageDoc"] != ""){
+												$cont_page = $total_pages - $_GET["pageDoc"];
+											}
+											$num_rows = 0;											
 											if (mysqli_num_rows($result) > 0) {
 												// output data of each row
 												while ($row = mysqli_fetch_assoc($result)) {
@@ -116,12 +119,12 @@ protegePagina(); // Chama a função que protege a página
 											$anterior = 0;
 										}
 										if ($anterior == 0) {
-											echo '<a href="listaDocumentos.php?page=' . $cont_page . '" class="btn btn-default"><i class="fa fa-angle-left"></i></a>';
+											echo '<a href="listaDocumentos.php?page=' . 0 . '" class="btn btn-default"><i class="fa fa-angle-left"></i></a>';
 										} else {
 											echo '<a href="listaDocumentos.php?page=' . ($cont_page - 100) . '" class="btn btn-default"><i class="fa fa-angle-left"></i></a>';
 										}
 										if ($proximo == 0) {
-											echo '<a href="listaDocumentos.php?page=' . $cont_page . '" class="btn btn-default"><i class="fa fa-angle-right"></i></a>';
+											echo '<a href="listaDocumentos.php?page=' . $total_pages . '" class="btn btn-default"><i class="fa fa-angle-right"></i></a>';
 										} else {
 											echo '<a href="listaDocumentos.php?page=' . ($cont_page + 100) . '" class="btn btn-default"><i class="fa fa-angle-right"></i></a>';
 										}

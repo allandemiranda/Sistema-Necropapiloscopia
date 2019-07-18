@@ -68,7 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							if (mysqli_query($conn, $sql)) {
 								echo '<div class="alert alert-success alert-dismissable">';
 								echo '<button aria-hidden="true" data-dismiss="alert" class="close" type="button"> × </button>';
-								echo 'Sucesso! Adicionado.';
+								$data_entrada_ex = explode("-", $data_entrada);
+								$protocolo_ano = $data_entrada_ex[0];
+								echo 'Sucesso! Documento <b>PROTOCOLO ' . str_pad(mysqli_insert_id($conn), 4, '0', STR_PAD_LEFT) . '/' . $protocolo_ano . '</b> adicionado.';
 								echo '</div>';
 							} else {
 								echo '<div class="alert alert-danger alert-dismissable">';
